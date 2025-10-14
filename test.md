@@ -1,26 +1,30 @@
 
-## Frequently Asked Questions
+Linux Daemon Services
 
 <details>
-  <summary>What is this project about?</summary>
+  <summary>DNS</summary>
 
-  This project is a demo to show how collapsible buttons work in GitHub Markdown.
+  DNS detials
 
 </details>
 
 <details>
-  <summary>How do I install it?</summary>
+  <summary>DHCP</summary>
 
-  1. Clone the repo
-  2. Run `npm install`
-  3. Run `npm start`
+  DHCP details
 
 </details>
 
 <details>
-  <summary>Can I contribute?</summary>
+  <summary>Apache</summary>
 
-  Yes! Please open an issue or submit a pull request.
+  Apache details
 
 </details>
 
+<details>
+  <summary>Nginx</summary>
+
+  Nginx details
+
+</details>
