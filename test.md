@@ -1,3 +1,5 @@
+
+## DNS
 <details>
   <summary>DNS</summary>
   
@@ -7,6 +9,7 @@ You can include any Markdown here, such as:
 - **bold text**
 - `inline code`
 
+## DHCP
 <details>
   <summary>DHCP</summary>
   
@@ -16,6 +19,7 @@ You can include any Markdown here, such as:
 - **bold text**
 - `inline code`
 
+## Apache
 <details>
   <summary>Apache</summary>
   
