@@ -1,10 +1,26 @@
-<details>
-  <summary>DNS</summary>
-  
-This is the hidden content that will be revealed when you click the summary.
-You can include any Markdown here, such as:
-- a bullet point
-- **bold text**
-- `inline code`
 
+## Frequently Asked Questions
+
+<details>
+  <summary>What is this project about?</summary>
+
+  This project is a demo to show how collapsible buttons work in GitHub Markdown.
+
+</details>
+
+<details>
+  <summary>How do I install it?</summary>
+
+  1. Clone the repo
+  2. Run `npm install`
+  3. Run `npm start`
+
+</details>
+
+<details>
+  <summary>Can I contribute?</summary>
+
+  Yes! Please open an issue or submit a pull request.
+
+</details>
 
