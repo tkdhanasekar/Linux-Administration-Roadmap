@@ -1,9 +1,9 @@
 
-Linux Daemon Services
+## Linux Administration Roadmap
 
 <details>
   <summary>DNS</summary>
-Here’s a comprehensive list of **DNS administration topics** specifically within the context of **Linux system administration**. These cover both foundational concepts and hands-on administration skills:
+Here’s a comprehensive list of DNS administration topics specifically within the context of Linux system administration. These cover both foundational concepts and hands-on administration skills:
 
 ---
 
