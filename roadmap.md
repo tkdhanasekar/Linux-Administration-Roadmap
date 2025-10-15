@@ -6,7 +6,7 @@
 
 ---
  
-✅ User and Group Management – Topics Overview
+## ✅ **User and Group Management – Topics Overview**
 
 ---
 
@@ -1102,7 +1102,6 @@
 
 <details>
   <summary>Filesystem and Disk Management</summary>
----
 
 ## ✅ **Filesystem and Disk Management – Topics Overview**
 
@@ -1454,7 +1453,6 @@
 
 <details>
   <summary>Process Management</summary>
----
 
 ## ✅ Process Management in Linux – Topics Overview
 
