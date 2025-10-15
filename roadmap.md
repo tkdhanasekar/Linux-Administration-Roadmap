@@ -224,6 +224,9 @@
 
 <details>
   <summary>Package Management</summary>
+
+--- 
+ 
 ## ✅ **Package Management in Linux – Key Topics**
 
 ### 🔹 1. **Overview of Package Management**
