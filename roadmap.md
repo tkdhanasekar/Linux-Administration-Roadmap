@@ -3,7 +3,6 @@
 
 <details>
   <summary>User and Group Management</summary>
-
 ---
  
 ## ✅ **User and Group Management – Topics Overview**
@@ -1756,6 +1755,270 @@
 ---
 </details>
 
+<details>
+  <summary>Permission Management</summary>
+
+## ✅ **Permission Management in Linux – Topics Overview**
+
+---
+
+### 🔹 1. **Understanding File Permissions**
+
+* Linux file permission model: User, Group, Others
+* Read (r), Write (w), Execute (x) permissions
+* Default permissions for files and directories
+* Permission notation:
+
+  * Symbolic (`rwxr-xr--`)
+  * Octal (`755`, `644`, etc.)
+
+---
+
+### 🔹 2. **Changing Permissions**
+
+* Use of `chmod`:
+
+  * Symbolic mode (`chmod u+x file`)
+  * Numeric mode (`chmod 755 file`)
+* Recursive permission changes (`chmod -R`)
+* When and how to give execute permissions
+
+---
+
+### 🔹 3. **Understanding and Changing Ownership**
+
+* Owners: User and Group
+* View ownership with `ls -l`
+* Change ownership with:
+
+  * `chown` (change user and/or group)
+  * `chgrp` (change group only)
+* Recursive ownership changes (`chown -R`)
+
+---
+
+### 🔹 4. **Default Permissions and `umask`**
+
+* What is `umask` and how it works
+* Calculating default permissions using `umask`
+* Set temporary `umask` value
+* Configure persistent `umask` (e.g., in `~/.bashrc`, `/etc/profile`)
+
+---
+
+### 🔹 5. **Special Permission Bits**
+
+* **Setuid (`s`)**:
+
+  * Executable runs with the file owner's privileges
+  * Used in commands like `passwd`
+* **Setgid (`s`)**:
+
+  * On files: run with group’s privileges
+  * On directories: new files inherit group
+* **Sticky bit (`t`)**:
+
+  * Used on shared directories (e.g., `/tmp`)
+  * Only file owner can delete
+
+---
+
+### 🔹 6. **Access Control Lists (ACLs)**
+
+* Extended permissions beyond standard `ugo`
+* Enable ACLs on filesystem (if not by default)
+* Use `getfacl` to view ACLs
+* Use `setfacl` to:
+
+  * Set user or group-specific permissions
+  * Set default ACLs on directories
+* Remove ACLs with `setfacl -x` or `setfacl -b`
+
+---
+
+### 🔹 7. **File and Directory Permissions Behavior**
+
+* Execute bit on directories (controls access to content)
+* Read vs execute on directories
+* Permissions required to:
+
+  * Enter a directory
+  * List files
+  * Read or write files
+
+---
+
+### 🔹 8. **Symbolic and Hard Links and Permissions**
+
+* How permissions work with symbolic (`ln -s`) and hard (`ln`) links
+* Effects of changing permissions on the link vs the target
+
+---
+
+### 🔹 9. **Permission Management Tools**
+
+* `ls -l`, `stat` – view detailed permissions
+* `chmod`, `chown`, `chgrp` – change permissions
+* `getfacl`, `setfacl` – ACL tools
+* `find` – to locate files by permission (`-perm` flag)
+
+---
+
+### 🔹 10. **Security and Best Practices**
+
+* Least privilege principle
+* Securing sensitive files (e.g., `/etc/shadow`)
+* Avoid giving write access to "others"
+* Use group-based permission strategies
+* Logging permission changes (auditd, `auditctl`)
+
+---
+
+### 🔹 11. **File Permission Defaults for New Files**
+
+* How umask affects new files and directories
+* Set directory default ACLs for collaborative environments
+* Use skeleton files (`/etc/skel/`) for setting initial user configs
+
+---
+
+### 🔹 12. **Permissions in Multi-User Environments**
+
+* Use of shared groups for team directories
+* Setgid on directories for group file inheritance
+* Sticky bit for shared temp folders
+* Preventing unauthorized file deletion
+
+---
+
+## ✅ **Linux Permission Management – Study Checklist**
+
+---
+
+### 🔸 1. **Understanding File Permissions**
+
+* [ ] Understand the Linux permission model: User, Group, Others
+* [ ] Identify read (`r`), write (`w`), and execute (`x`) permissions
+* [ ] Interpret symbolic permissions (e.g. `rwxr-xr--`)
+* [ ] Interpret numeric/octal permissions (e.g. `755`, `644`)
+* [ ] Use `ls -l` to view file permissions
+
+---
+
+### 🔸 2. **Modifying Permissions**
+
+* [ ] Change file permissions using `chmod`
+
+  * [ ] Symbolic mode (`u+x`, `g-w`, etc.)
+  * [ ] Numeric mode (`chmod 755 filename`)
+* [ ] Apply permissions recursively with `chmod -R`
+* [ ] Understand how permissions apply differently to files vs. directories
+
+---
+
+### 🔸 3. **File and Directory Ownership**
+
+* [ ] View file owner and group using `ls -l` or `stat`
+* [ ] Change file owner using `chown`
+* [ ] Change group ownership using `chgrp`
+* [ ] Recursively change ownership with `chown -R`
+
+---
+
+### 🔸 4. **Default Permissions and `umask`**
+
+* [ ] Understand how default permissions are determined
+* [ ] Calculate final permissions using `umask`
+* [ ] View current `umask` with `umask` command
+* [ ] Set persistent `umask` in shell config files (e.g. `~/.bashrc`, `/etc/profile`)
+
+---
+
+### 🔸 5. **Special Permission Bits**
+
+* [ ] Understand and set **Setuid** (`chmod u+s`)
+
+  * [ ] Verify with `ls -l` (`s` in user field)
+* [ ] Understand and set **Setgid** (`chmod g+s`)
+
+  * [ ] Used in shared directories for group inheritance
+* [ ] Understand and set **Sticky bit** (`chmod +t`)
+
+  * [ ] Used to secure public directories like `/tmp`
+
+---
+
+### 🔸 6. **Access Control Lists (ACLs)**
+
+* [ ] Understand the need for ACLs (fine-grained permissions)
+* [ ] View current ACLs using `getfacl`
+* [ ] Set ACLs using `setfacl` (e.g., `setfacl -m u:john:rw file.txt`)
+* [ ] Set default ACLs for directories
+* [ ] Remove ACLs with `setfacl -x` or clear all with `setfacl -b`
+* [ ] Ensure filesystem is mounted with ACL support
+
+---
+
+### 🔸 7. **Working with Directory Permissions**
+
+* [ ] Understand execute (`x`) permission on directories
+* [ ] Know what’s required to:
+
+  * [ ] List directory contents
+  * [ ] Enter directory
+  * [ ] Read/write files inside
+* [ ] Practice secure directory setups (e.g., `chmod 700 ~/private`)
+
+---
+
+### 🔸 8. **Links and Permissions**
+
+* [ ] Understand how permissions work with symbolic links
+* [ ] Understand how permissions work with hard links
+* [ ] Know that `chmod` on symlink affects the target (not the link itself)
+
+---
+
+### 🔸 9. **Permission Tools and Utilities**
+
+* [ ] Use `ls`, `stat` to inspect permissions
+* [ ] Use `chmod`, `chown`, `chgrp` to manage them
+* [ ] Use `find` to locate files with specific permissions (`-perm`)
+* [ ] Use `namei` to troubleshoot path permission issues
+* [ ] Use `lsof` to check open files by process
+
+---
+
+### 🔸 10. **Multi-User Security Practices**
+
+* [ ] Use shared groups for collaborative access
+* [ ] Use Setgid on directories for consistent group ownership
+* [ ] Use the sticky bit to prevent file deletion in shared dirs
+* [ ] Avoid giving write permission to “others”
+* [ ] Restrict file access with strict `umask` (e.g., `077`)
+
+---
+
+### 🔸 11. **System Files and Security**
+
+* [ ] Understand critical file permissions (e.g., `/etc/passwd`, `/etc/shadow`)
+* [ ] Secure configuration files with appropriate ownership and modes
+* [ ] Prevent privilege escalation by locking down world-writable files
+* [ ] Check system for misconfigured permissions with `find`
+
+---
+
+### 🔸 12. **Practice and Troubleshooting**
+
+* [ ] Practice setting permissions and ownership on files/directories
+* [ ] Create a shared group folder with ACLs or Setgid
+* [ ] Debug "Permission denied" errors with `ls`, `stat`, `namei`, or `sudo`
+* [ ] Set up sticky bit on `/tmp`-like directories and test deletion protection
+* [ ] Practice interpreting permission modes under timed conditions
+* [ ] Write commands to correct permission/ownership for given scenarios
+* [ ] Use `find / -perm -4000` to detect SUID binaries (common exam topic)
+
+</details>
 
 
 <details>
