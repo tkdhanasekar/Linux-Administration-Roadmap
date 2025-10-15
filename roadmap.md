@@ -5,6 +5,10 @@
   <summary>User and Group Management</summary>
 
 ---
+ 
+✅ User and Group Management – Topics Overview
+
+---
 
 ### 🔹 **1. User Account Management**
 
@@ -100,10 +104,6 @@
 * Detecting inactive or locked accounts
 * Monitoring sudo usage
 * Handling compromised accounts
-
----
-
-**comprehensive study checklist** for **User and Group Management in Linux Administration**
 
 ---
 
@@ -214,7 +214,7 @@
 
 ---
 
-### ✅ Bonus: Practice Tasks
+### 🔸 12. Practice Tasks
 
 * [ ] Create 5 users and assign different groups and shells
 * [ ] Configure a user with a locked account and password expiration
@@ -231,6 +231,8 @@
 --- 
  
 ## ✅ **Package Management in Linux – Key Topics**
+
+---
 
 ### 🔹 1. **Overview of Package Management**
 
@@ -342,10 +344,6 @@
 * Using Ansible, Puppet, or shell scripts for package tasks
 * Preseed/kickstart for automated installs with pre-installed packages
 * Maintaining system consistency across servers
-
----
-
-Here's a **comprehensive study checklist** for **Package Management in Linux Administration** It covers both **Debian-based** and **Red Hat-based** systems
 
 ---
 
@@ -626,10 +624,6 @@ Here's a **comprehensive study checklist** for **Package Management in Linux Adm
 * Creating mount points (e.g., `/mnt`, `/media`)
 * Mounting temporary filesystems or bind mounts (e.g., `mount --bind`)
 * Understanding mount context for file access
-
----
-
-Here’s a **comprehensive study checklist** for **File and Directory Management** in **Linux Administration**.
 
 ---
 
@@ -1457,161 +1451,318 @@ Here’s a **comprehensive study checklist** for **File and Directory Management
 ---
 </details>
 
+
 <details>
-  <summary>DNS</summary>
-Here’s a comprehensive list of DNS administration topics specifically within the context of Linux system administration. These cover both foundational concepts and hands-on administration skills:
+  <summary>Process Management</summary>
+---
+
+## ✅ Process Management in Linux – Topics Overview
 
 ---
 
-## 📘 DNS Administration Topics in Linux
+### 🔹 1. **Understanding Linux Processes**
 
-### 1. **Introduction to DNS**
-
-* What is DNS?
-* DNS hierarchy: Root, TLD, authoritative servers
-* DNS record types: A, AAAA, CNAME, MX, TXT, NS, PTR, SRV, SOA
-* Recursive vs iterative queries
-
----
-
-### 2. **Linux DNS Client Configuration**
-
-* `/etc/resolv.conf`
-* `nmcli` or NetworkManager for DNS configuration
-* Setting up DNS in `/etc/systemd/resolved.conf`
-* Testing DNS resolution using:
-
-  * `dig`
-  * `nslookup`
-  * `host`
+* What is a process?
+* Process lifecycle (start, run, wait, terminate)
+* Foreground vs. background processes
+* Parent and child processes
+* PID (Process ID) and PPID (Parent Process ID)
 
 ---
 
-### 3. **BIND (Berkeley Internet Name Domain) – DNS Server**
+### 🔹 2. **Viewing Running Processes**
 
-* Installing BIND: `bind9` or `named`
-* BIND configuration files:
+* Listing processes:
 
-  * `/etc/named.conf` or `/etc/bind/named.conf`
-  * `/var/named/` or `/etc/bind/zones/`
-* Creating and editing zone files
-* Forward and reverse DNS zones
-* Zone file syntax and TTLs
-
----
-
-### 4. **DNS Records Management**
-
-* A/AAAA (IPv4/IPv6 address)
-* CNAME (alias)
-* MX (mail exchanger)
-* PTR (reverse lookup)
-* TXT (SPF, DKIM)
-* NS (name server delegation)
-* SOA (start of authority)
+  * `ps`
+  * `top` / `htop`
+  * `pgrep`, `pidof`
+  * `pstree`
+* Real-time monitoring with `top`, `htop`, `glances`
+* Filtering processes by user, name, PID, TTY, etc.
 
 ---
 
-### 5. **Zone Delegation and Subdomains**
+### 🔹 3. **Controlling Processes**
 
-* Creating subdomains
-* Delegating authority to child zones
-* Configuring NS records for subzones
+* Start, pause, resume, and terminate processes:
 
----
-
-### 6. **Reverse DNS Configuration**
-
-* Understanding in-addr.arpa and ip6.arpa zones
-* Creating PTR records for reverse lookups
-
----
-
-### 7. **DNS Caching and Performance**
-
-* Caching DNS responses with `dnsmasq` or `unbound`
-* Configuring TTL and cache settings
-* Flushing DNS cache (on client and server)
-* Tools for testing: `dig +trace`, `drill`
+  * `kill`, `killall`
+  * `pkill`
+  * `nice`, `renice`
+  * `fg`, `bg`
+  * `jobs`
+  * `wait`, `disown`
+* Sending signals to processes (e.g., `SIGTERM`, `SIGKILL`, `SIGHUP`)
 
 ---
 
-### 8. **DNS Security**
+### 🔹 4. **Background and Foreground Jobs**
 
-* DNSSEC basics and configuration
-* TSIG (Transaction SIGnature) for zone transfers
-* Preventing DNS spoofing
-* Using `named-checkconf` and `named-checkzone` for validation
-
----
-
-### 9. **Logging and Troubleshooting**
-
-* BIND log files: `/var/log/named/`, syslog
-* Enabling query logging
-* Debugging with `dig`, `tcpdump`, `journalctl`
-* Common errors: SERVFAIL, NXDOMAIN, REFUSED
+* Run process in background using `&`
+* List jobs with `jobs`
+* Bring job to foreground: `fg`
+* Send job to background: `bg`
+* Use `nohup` and `disown` for persistent background jobs
 
 ---
 
-### 10. **Automation and Scripting**
+### 🔹 5. **Process Priorities and Scheduling**
 
-* Scripting DNS updates with `nsupdate`
-* Managing DNS with Ansible/Bash scripts
-* Zone file templating
-
----
-
-### 11. **High Availability and Redundancy**
-
-* Setting up secondary (slave) DNS servers
-* Zone transfers (AXFR, IXFR)
-* Load balancing DNS servers
+* Understanding nice values (range: -20 to 19)
+* Set priority with `nice`
+* Change priority of running processes with `renice`
+* Real-time vs. normal scheduling
+* Scheduling classes: `SCHED_OTHER`, `SCHED_FIFO`, `SCHED_RR`
+* `chrt` command for real-time scheduling
 
 ---
 
-### 12. **DNS Forwarding and Conditional Forwarding**
+### 🔹 6. **Monitoring Resource Usage**
 
-* Setting up forwarders in BIND
-* Split-horizon DNS (internal vs external views)
-* Using `views` in BIND for conditional DNS serving
+* View CPU and memory usage:
 
----
-
-### 13. **Local DNS Servers for Development**
-
-* Using `dnsmasq` for lightweight DNS
-* Using `unbound` for validating recursive resolver
-* Hosts file override (`/etc/hosts`)
+  * `top`, `htop`
+  * `ps aux --sort=-%mem`
+  * `vmstat`, `iostat`
+* Identify high resource-consuming processes
 
 ---
 
-### 14. **Monitoring and Auditing**
+### 🔹 7. **Process Limits and Resource Control**
 
-* Monitoring DNS queries
-* Rate limiting DNS queries
-* DNS analytics with tools like `dnstop`, `dnsstat`
+* View and set limits with `ulimit`
+* Soft vs. hard limits
+* Persistent limits in `/etc/security/limits.conf`
+* Monitor per-process open files and limits:
+
+  * `lsof`
+  * `/proc/[pid]/limits`
+
+---
+
+### 🔹 8. **The `/proc` Filesystem**
+
+* Process details in `/proc/[pid]/`
+* Files of interest:
+
+  * `status`
+  * `cmdline`
+  * `cwd`
+  * `fd/`
+* Use `/proc` to monitor system and process info
+
+---
+
+### 🔹 9. **Zombie and Orphan Processes**
+
+* What is a zombie process?
+* How to detect and handle zombies
+* What is an orphan process?
+* How init/systemd adopts orphaned processes
+
+---
+
+### 🔹 10. **Process Accounting (Optional/Advanced)**
+
+* Enable process accounting with `acct` or `psacct`
+* Use `sa`, `lastcomm`, and `accton` for tracking
+* Use `auditd` for process-level auditing (security-focused)
+
+---
+
+### 🔹 11. **Systemd and Process Control**
+
+* List and control system services: `systemctl`
+* Start, stop, enable, disable background services
+* Difference between a system process and a user process
+* Understanding systemd unit files (`.service`)
+
+---
+
+### 🔹 12. **Creating and Managing Custom Processes**
+
+* Write and run simple shell scripts as processes
+* Run scripts with scheduling (`at`, `cron`, `systemd timers`)
+* Create persistent processes using `tmux`, `screen`, or `nohup`
+
+---
+
+### 🔹 13. **Debugging and Tracing Processes (Advanced)**
+
+* Use `strace` to trace system calls
+* Use `lsof` to find open files by processes
+* Use `gdb` to debug running processes
+* Examine memory usage with `pmap`, `smem`
+
+---
+
+## ✅ **Linux Process Management – Study Checklist**
+
+---
+
+### 🔸 1. **Linux Process Fundamentals**
+
+* [ ] Understand what a process is
+* [ ] Understand PID (Process ID) and PPID (Parent Process ID)
+* [ ] Know the difference between foreground and background processes
+* [ ] Understand process states (Running, Sleeping, Zombie, etc.)
+* [ ] Learn how Linux creates processes (`fork()`, `exec()`)
+
+---
+
+### 🔸 2. **Listing and Viewing Processes**
+
+* [ ] List all running processes using:
+
+  * [ ] `ps`, `ps aux`, `ps -ef`
+  * [ ] `top`
+  * [ ] `htop` (if installed)
+* [ ] View process tree: `pstree`
+* [ ] Find processes by name or user: `pgrep`, `pidof`
+
+---
+
+### 🔸 3. **Foreground & Background Jobs**
+
+* [ ] Run a command in the background using `&`
+* [ ] Bring jobs to foreground with `fg`
+* [ ] Send jobs to background with `bg`
+* [ ] List background jobs using `jobs`
+* [ ] Detach jobs using `disown`
+* [ ] Use `nohup` to run a job persistently in the background
+
+---
+
+### 🔸 4. **Managing and Controlling Processes**
+
+* [ ] Send signals to processes using:
+
+  * [ ] `kill` (by PID)
+  * [ ] `killall` (by name)
+  * [ ] `pkill` (by name or pattern)
+* [ ] Understand common signals:
+
+  * [ ] `SIGTERM` (15): terminate gracefully
+  * [ ] `SIGKILL` (9): force kill
+  * [ ] `SIGHUP` (1): reload configuration
+* [ ] Pause/resume processes using `CTRL+Z`, `fg`, `bg`
+* [ ] Wait for processes to complete using `wait`
+
+---
+
+### 🔸 5. **Process Prioritization**
+
+* [ ] Understand nice values (-20 to 19)
+* [ ] Launch a command with a specific priority using `nice`
+* [ ] Change the priority of a running process using `renice`
+* [ ] Know the impact of priority on CPU scheduling
+
+---
+
+### 🔸 6. **Monitoring CPU and Memory Usage**
+
+* [ ] Monitor CPU usage of processes using:
+
+  * [ ] `top`, `htop`, `ps`
+  * [ ] `ps aux --sort=-%cpu`
+* [ ] Monitor memory usage:
+
+  * [ ] `ps aux --sort=-%mem`
+  * [ ] `free`, `vmstat`, `smem`
+* [ ] Use `iotop` or `iostat` to monitor disk I/O by process (if installed)
+
+---
+
+### 🔸 7. **Process Limits and Resource Control**
+
+* [ ] View current limits using `ulimit -a`
+* [ ] Set temporary limits using `ulimit`
+* [ ] Configure persistent user limits:
+
+  * [ ] `/etc/security/limits.conf`
+* [ ] Understand soft vs. hard limits
+
+---
+
+### 🔸 8. **Understanding the `/proc` Filesystem**
+
+* [ ] Navigate `/proc/[PID]/` to inspect:
+
+  * [ ] `status`
+  * [ ] `cmdline`
+  * [ ] `cwd`
+  * [ ] `fd/` (open file descriptors)
+* [ ] Understand the role of `/proc` in process monitoring
+
+---
+
+### 🔸 9. **Zombie and Orphan Processes**
+
+* [ ] Define what zombie processes are
+* [ ] Detect zombies using `ps` or `top`
+* [ ] Know how zombies are cleaned up by the init process
+* [ ] Understand orphan processes and how `systemd`/`init` adopts them
+
+---
+
+### 🔸 10. **Systemd and Service-Based Processes**
+
+* [ ] Start, stop, and manage services using `systemctl`
+* [ ] Understand how services run as processes
+* [ ] Check service status and logs: `systemctl status`, `journalctl`
+* [ ] Understand service units and their relation to processes
+
+---
+
+### 🔸 11. **Custom Processes and Background Scripts**
+
+* [ ] Run shell scripts in background
+* [ ] Use `tmux` or `screen` to manage persistent sessions
+* [ ] Automate process execution using:
+
+  * [ ] `cron` for scheduled tasks
+  * [ ] `at` for one-time jobs
+
+---
+
+### 🔸 12. **Debugging and Tracing Processes (Advanced)**
+
+* [ ] Trace system calls with `strace`
+* [ ] Monitor open files with `lsof`
+* [ ] Debug running processes with `gdb` (basic)
+* [ ] Analyze memory maps using `pmap`
+* [ ] Monitor file access and activity with `inotify-tools` (optional)
+
+---
+
+### 🔸 13. **Process Accounting (Optional/Advanced)**
+
+* [ ] Install and enable process accounting: `acct`, `psacct`
+* [ ] Use tools:
+
+  * [ ] `sa` to summarize command usage
+  * [ ] `lastcomm` to view commands by user
+  * [ ] `accton` to enable accounting
+
+---
+
+### 🔸 Bonus Practice Tasks
+
+* [ ] Start a long-running job in the background and bring it to foreground
+* [ ] Kill a process by name using `pkill` and by PID using `kill`
+* [ ] Adjust a running process's priority using `renice`
+* [ ] Monitor the top 5 CPU-consuming processes
+* [ ] View the full environment of a running process using `/proc/[PID]/environ`
 
 ---
 </details>
 
-<details>
-  <summary>DHCP</summary>
 
-  DHCP details
+
+<details>
+  <summary>****</summary>
 
 </details>
 
-<details>
-  <summary>Apache</summary>
 
-  Apache details
-
-</details>
-
-<details>
-  <summary>Nginx</summary>
-
-  Nginx details
-
-</details>
