@@ -495,7 +495,6 @@ Here's a **comprehensive study checklist** for **Package Management in Linux Adm
 
 <details>
   <summary>File and Directory Management</summary>
- Here's a **comprehensive list of topics** in **File and Directory Management** for **Linux system administration**. This area is essential for working with the filesystem, maintaining file security, automation, and managing storage efficiently.
 
 ---
 
@@ -772,8 +771,691 @@ Here’s a **comprehensive study checklist** for **File and Directory Management
 
 </details>
 
+<details>
+  <summary>Networking Management</summary>
+
+---
+
+## ✅ **Networking Management in Linux – Topics Overview**
+
+---
+
+### 🔹 1. **Networking Basics**
+
+* OSI and TCP/IP models (basic understanding)
+* IP addressing: IPv4 and IPv6
+* Subnetting, CIDR notation
+* Default gateway and routing concepts
+* Public vs. private IP addresses
+* DNS concepts and how name resolution works
+
+---
+
+### 🔹 2. **Interface Configuration**
+
+* Network interfaces naming (`eth0`, `ens33`, `enp0s3`, etc.)
+* Viewing interfaces: `ip a`, `ifconfig`, `nmcli device`
+* Enabling/disabling interfaces
+* Assigning static and dynamic IP addresses
+* Configuring interface files:
+
+  * `/etc/network/interfaces` (Debian/Ubuntu)
+  * `/etc/sysconfig/network-scripts/ifcfg-*` (RHEL/CentOS)
+  * `netplan` configuration files (Ubuntu 18.04+)
+
+---
+
+### 🔹 3. **Networking Tools & Commands**
+
+* `ip` command suite: `ip a`, `ip r`, `ip link`, `ip addr add/del`
+* Legacy: `ifconfig`, `route`, `netstat`
+* `nmcli` and `nmtui` (NetworkManager tools)
+* `hostname`, `hostnamectl`
+* `ping`, `traceroute`, `mtr`
+* `dig`, `nslookup`, `host`
+* `arp`, `ip neigh`
+* `ss`, `netstat` for socket and port monitoring
+* `ethtool`, `mii-tool` for interface diagnostics
+
+---
+
+### 🔹 4. **Hostname and DNS Configuration**
+
+* Set and persist hostname: `hostnamectl set-hostname`
+* Configure DNS in:
+
+  * `/etc/resolv.conf` (traditional)
+  * `systemd-resolved` (`/etc/systemd/resolved.conf`)
+  * `netplan`, NetworkManager, or interface config files
+* Test DNS with `dig`, `host`, `nslookup`
+
+---
+
+### 🔹 5. **Routing and Gateways**
+
+* View routing table: `ip route`, `route -n`
+* Add/remove static routes
+* Default gateway configuration
+* Persistent static routes
+
+---
+
+### 🔹 6. **Firewall and Port Management**
+
+* `iptables` (traditional firewall tool)
+* `nftables` (modern replacement for iptables)
+* `firewalld` and `firewall-cmd` (common on RHEL-based distros)
+* Opening, closing, forwarding ports
+* Managing services/zones with `firewalld`
+
+---
+
+### 🔹 7. **Network Services & Daemons**
+
+* Enable and monitor key services:
+
+  * `sshd`, `dhclient`, `NetworkManager`, `systemd-networkd`
+* Service management with `systemctl`
+* Logging network service activity (`journalctl`, `/var/log/`)
+
+---
+
+### 🔹 8. **Testing and Troubleshooting**
+
+* Test connectivity: `ping`, `curl`, `wget`
+* Check open ports: `ss -tuln`, `netstat -tulnp`, `nmap`
+* Trace route to remote host: `traceroute`, `mtr`
+* Debug DNS issues: `dig`, `host`, `nslookup`
+* Use `tcpdump` and `wireshark` for packet capture and analysis
+
+---
+
+### 🔹 9. **DHCP and Static IP Configuration**
+
+* Configure DHCP clients (`dhclient`, `dhcpcd`)
+* Set static IP addresses via:
+
+  * Interface files
+  * `nmcli` or `nmtui`
+  * `netplan`
+* Restarting network services
+
+---
+
+### 🔹 10. **Advanced Network Features**
+
+* Bridging interfaces: `brctl`, `ip link add type bridge`
+* Bonding (link aggregation): `modprobe bonding`, `ifenslave`, `nmcli`
+* VLANs: `ip link add link eth0 name eth0.100 type vlan id 100`
+* Network namespaces and virtual interfaces
+* Tunneling: GRE, IPIP, etc.
+
+---
+
+### 🔹 11. **SSH and Remote Access**
+
+* Secure Shell basics: `ssh`, `scp`, `sftp`
+* SSH key management
+* SSH server config: `/etc/ssh/sshd_config`
+* Port forwarding with SSH
+* Restricting and securing SSH access
+
+---
+
+### 🔹 12. **Proxy, NAT, and Port Forwarding**
+
+* Set up basic NAT with `iptables` or `nftables`
+* Configure port forwarding
+* Use of HTTP/HTTPS proxies (`http_proxy`, `https_proxy`)
+* Configure transparent proxies (e.g., `squid`)
+
+---
+
+### 🔹 13. **Network Monitoring and Analysis**
+
+* Monitor traffic with `iftop`, `iptraf`, `bmon`
+* Capture packets with `tcpdump`, analyze with `wireshark`
+* Identify bandwidth usage
+* Detect open ports and services with `nmap`
+
+---
+
+### 🔹 14. **Network Configuration Systems**
+
+* Traditional tools: `ifconfig`, `system-config-network`
+* Modern tools:
+
+  * `NetworkManager` (`nmcli`, `nmtui`)
+  * `netplan` (Ubuntu 18.04+)
+  * `systemd-networkd`
+* Configure persistent settings for reboots
+
+---
+
+### 🔹 15. **Security Considerations**
+
+* Disable unused network services
+* Secure SSH access (disable root login, use keys)
+* Block unused ports with firewalls
+* Monitor for unauthorized open ports or connections
+* Use intrusion detection tools (e.g., `fail2ban`, `snort`)
+
+---
+
+## ✅ **Linux Networking Management – Study Checklist**
+
+---
+
+### 🔸 1. Networking Fundamentals
+
+* [ ] Understand TCP/IP and OSI models (layer functions)
+* [ ] Identify IPv4 and IPv6 address types and structures
+* [ ] Understand subnetting and CIDR notation
+* [ ] Differentiate public vs. private IPs
+* [ ] Know what DNS does and how name resolution works
+* [ ] Understand default gateway and basic routing principles
+
+---
+
+### 🔸 2. Interface Management
+
+* [ ] List and inspect network interfaces: `ip a`, `ifconfig`
+* [ ] Bring interfaces up/down: `ip link set`, `ifdown/ifup`
+* [ ] Assign static IPs using:
+
+  * Interface config files (`/etc/sysconfig/`, `/etc/network/interfaces`)
+  * `nmcli` or `nmtui`
+  * `netplan` (Ubuntu)
+* [ ] Configure dynamic IPs via DHCP
+* [ ] View MAC addresses and link status: `ip link`, `ethtool`
+
+---
+
+### 🔸 3. Essential Networking Commands
+
+* [ ] Use `ping` to test connectivity
+* [ ] Trace route with `traceroute` or `mtr`
+* [ ] Lookup DNS info: `dig`, `nslookup`, `host`
+* [ ] View and manage routes: `ip route`, `route`, `ip r`
+* [ ] Monitor connections and ports: `ss`, `netstat`, `lsof -i`
+* [ ] View ARP cache: `ip neigh`, `arp`
+
+---
+
+### 🔸 4. Hostname and DNS Configuration
+
+* [ ] Set the hostname using `hostnamectl`
+* [ ] Configure DNS manually:
+
+  * `/etc/resolv.conf`
+  * Via interface or `netplan`
+* [ ] Test name resolution using `ping`, `dig`, `host`
+
+---
+
+### 🔸 5. Routing and Gateways
+
+* [ ] Display the routing table: `ip route`
+* [ ] Add and delete static routes: `ip route add/del`
+* [ ] Configure persistent routes (via config files)
+
+---
+
+### 🔸 6. Network Services and Daemons
+
+* [ ] Enable and restart networking service (`systemctl restart NetworkManager`)
+* [ ] Configure and check `sshd` (SSH daemon)
+* [ ] View service logs with `journalctl`, `systemctl status`
+
+---
+
+### 🔸 7. SSH and Remote Access
+
+* [ ] Connect to remote servers using `ssh`
+* [ ] Copy files using `scp`, `rsync`, `sftp`
+* [ ] Set up SSH key authentication
+* [ ] Modify SSH server config (`/etc/ssh/sshd_config`)
+* [ ] Restrict SSH access (users, ports, root login)
+* [ ] Set up SSH port forwarding (local, remote, dynamic)
+
+---
+
+### 🔸 8. DHCP and Static IP Configuration
+
+* [ ] Configure static IPs via:
+
+  * NetworkManager (`nmcli`)
+  * Netplan
+  * Legacy interface files
+* [ ] Start and stop `dhclient`
+* [ ] Verify DHCP leases
+
+---
+
+### 🔸 9. Firewall and Port Control
+
+* [ ] Use `iptables` or `nftables` to:
+
+  * Allow/deny traffic by port/IP
+  * Configure NAT/masquerading
+* [ ] Manage firewalld zones with `firewall-cmd`
+* [ ] Open and close ports
+* [ ] Set default policies
+* [ ] Save and restore firewall configurations
+
+---
+
+### 🔸 10. Advanced Networking Features
+
+* [ ] Create and manage virtual network interfaces
+* [ ] Set up VLANs using `ip link` or `vconfig`
+* [ ] Configure network bonding (LACP, active-backup)
+* [ ] Create bridges for virtual machines or containers
+* [ ] Use `ip netns` for network namespaces
+
+---
+
+### 🔸 11. Proxy and NAT Configuration
+
+* [ ] Configure outbound NAT/masquerading with `iptables/nftables`
+* [ ] Set environment variables: `http_proxy`, `https_proxy`, `no_proxy`
+* [ ] Use proxy-aware tools (`curl`, `apt`, `yum` with proxies)
+* [ ] Configure port forwarding with `iptables`, `nftables`, or `sshd`
+
+---
+
+### 🔸 12. Network Monitoring and Diagnostics
+
+* [ ] Monitor bandwidth and usage with `iftop`, `nload`, `bmon`
+* [ ] Capture traffic with `tcpdump`
+* [ ] Analyze packets with Wireshark (`.pcap` files)
+* [ ] Scan open ports with `nmap`
+* [ ] Check logs for networking issues (`/var/log/`, `journalctl`)
+
+---
+
+### 🔸 13. Network Configuration Systems
+
+* [ ] Use legacy tools: `ifconfig`, `route`, `/etc/network/interfaces`
+* [ ] Use `NetworkManager` tools: `nmcli`, `nmtui`, `nm-connection-editor`
+* [ ] Use `netplan` for Ubuntu 18.04+
+* [ ] Understand `systemd-networkd` basics
+
+---
+
+### 🔸 14. Security Best Practices
+
+* [ ] Disable unused interfaces and ports
+* [ ] Use firewall rules to limit access
+* [ ] Use SSH key authentication (no passwords)
+* [ ] Monitor for unauthorized open ports
+* [ ] Install and configure `fail2ban` to prevent brute force attacks
+
+---
+
+### 🔸 Bonus: Practice Exercises
+
+* [ ] Configure a static IP and test connectivity
+* [ ] Create and test a VLAN or bridge interface
+* [ ] Set up and test firewall rules to allow/block specific traffic
+* [ ] Set up SSH key authentication and disable password login
+* [ ] Capture network traffic with `tcpdump` and analyze it
+
+---
+
+</details>
 
 
+<details>
+  <summary>Filesystem and Disk Management</summary>
+---
+
+## ✅ **Filesystem and Disk Management – Topics Overview**
+
+---
+
+### 🔹 1. **Disk and Storage Device Basics**
+
+* Device naming conventions (`/dev/sda`, `/dev/nvme0n1`, etc.)
+* Understanding partitions vs. whole disks
+* Viewing disk info: `lsblk`, `blkid`, `fdisk -l`
+
+---
+
+### 🔹 2. **Partitioning Disks**
+
+* Partition types: primary, extended, logical
+* Partition tables: MBR vs. GPT
+* Tools for partitioning:
+
+  * `fdisk`
+  * `parted`
+  * `gdisk`
+  * `cfdisk`
+
+---
+
+### 🔹 3. **Filesystem Types**
+
+* Common Linux filesystems:
+
+  * `ext2`, `ext3`, `ext4`
+  * `xfs`
+  * `btrfs`
+  * `vfat`, `ntfs`
+* Journaling vs. non-journaling filesystems
+* Choosing the right filesystem for a use case
+
+---
+
+### 🔹 4. **Creating and Managing Filesystems**
+
+* Creating filesystems: `mkfs` (e.g., `mkfs.ext4`, `mkfs.xfs`)
+* Formatting partitions
+* Viewing filesystem info: `tune2fs`, `xfs_info`
+* Labeling filesystems: `e2label`, `xfs_admin`
+
+---
+
+### 🔹 5. **Mounting and Unmounting Filesystems**
+
+* Mounting manually: `mount`
+* Unmounting: `umount`
+* Persistent mounts using `/etc/fstab`
+* Mounting by:
+
+  * Device name
+  * UUID
+  * Label
+* Mount options (e.g., `noatime`, `ro`, `defaults`)
+
+---
+
+### 🔹 6. **Filesystem Maintenance**
+
+* Checking and repairing filesystems:
+
+  * `fsck`
+  * `xfs_repair`
+* Resizing filesystems:
+
+  * `resize2fs`, `xfs_growfs`
+* Tuning filesystem parameters: `tune2fs`
+* File attributes: `lsattr`, `chattr`
+
+---
+
+### 🔹 7. **Swap Space Management**
+
+* What is swap and how it works
+* Creating swap partitions/files
+* Enabling/disabling swap: `swapon`, `swapoff`
+* Viewing swap usage: `free`, `swapon --show`
+* Configuring swap in `/etc/fstab`
+
+---
+
+### 🔹 8. **Logical Volume Management (LVM)**
+
+* Concepts: PV, VG, LV
+* Creating:
+
+  * Physical volumes (`pvcreate`)
+  * Volume groups (`vgcreate`)
+  * Logical volumes (`lvcreate`)
+* Resizing logical volumes:
+
+  * `lvextend`, `lvreduce`
+  * `resize2fs`, `xfs_growfs`
+* Viewing LVM info: `pvs`, `vgs`, `lvs`
+* Taking and restoring snapshots
+
+---
+
+### 🔹 9. **Disk and Filesystem Usage Monitoring**
+
+* Checking disk space: `df -h`
+* Checking directory/file sizes: `du`, `ncdu`
+* Checking inode usage: `df -i`
+* Finding large files: `find`, `du`, `ncdu`
+
+---
+
+### 🔹 10. **Automounting and Removable Media**
+
+* Mounting USB drives, CDs manually
+* Automatic mounting using:
+
+  * `autofs`
+  * `udev` rules
+* Mounting ISO images: `mount -o loop`
+
+---
+
+### 🔹 11. **Filesystem Quotas**
+
+* Enabling user/group quotas
+* Tools:
+
+  * `quota`
+  * `edquota`
+  * `repquota`
+  * `quotacheck`
+* Setting soft and hard limits
+
+---
+
+### 🔹 12. **RAID (Software RAID with mdadm)**
+
+* RAID levels: 0, 1, 5, 6, 10
+* Creating and managing arrays with `mdadm`
+* Checking RAID status (`cat /proc/mdstat`)
+* Rebuilding and monitoring arrays
+
+---
+
+### 🔹 13. **File and Disk Backup Tools**
+
+* Archiving: `tar`, `cpio`
+* Syncing: `rsync`
+* Disk cloning: `dd`
+* Backup best practices
+
+---
+
+### 🔹 14. **Encrypted Filesystems (LUKS)**
+
+* Encrypting partitions: `cryptsetup`
+* Mounting and unmounting encrypted volumes
+* Managing passphrases and keys
+
+---
+
+### 🔹 15. **Network Filesystems**
+
+* Mounting NFS shares: `mount -t nfs`
+* Mounting CIFS/SMB shares: `mount -t cifs`
+* Persistent network shares in `/etc/fstab`
+
+---
+
+## ✅ Filesystem & Disk Management in Linux – Study Checklist
+
+---
+
+### 🔸 1. Disk and Storage Fundamentals
+
+* [ ] Understand Linux disk naming (e.g. `/dev/sda`, `/dev/nvme0n1`)
+* [ ] Identify different storage devices (HDD, SSD, USB, virtual disks)
+* [ ] Know the difference between disks and partitions
+* [ ] Use `lsblk`, `blkid`, and `fdisk -l` to list disks and partitions
+
+---
+
+### 🔸 2. Partitioning Disks
+
+* [ ] Understand partition types: primary, extended, logical
+* [ ] Understand MBR vs GPT partition schemes
+* [ ] Create partitions using:
+
+  * [ ] `fdisk` (for MBR)
+  * [ ] `gdisk` (for GPT)
+  * [ ] `parted`
+* [ ] Delete, resize, and label partitions
+
+---
+
+### 🔸 3. Filesystem Types and Concepts
+
+* [ ] Understand journaling vs non-journaling filesystems
+* [ ] Compare Linux filesystems:
+
+  * [ ] `ext2`, `ext3`, `ext4`
+  * [ ] `xfs`
+  * [ ] `btrfs`
+  * [ ] `vfat`, `ntfs`
+* [ ] Choose an appropriate filesystem for different use cases
+
+---
+
+### 🔸 4. Creating and Managing Filesystems
+
+* [ ] Format partitions using:
+
+  * [ ] `mkfs.ext4`
+  * [ ] `mkfs.xfs`
+  * [ ] `mkfs.vfat`
+* [ ] Label filesystems with `e2label` or `xfs_admin`
+* [ ] View filesystem details using `tune2fs` or `xfs_info`
+
+---
+
+### 🔸 5. Mounting and Unmounting Filesystems
+
+* [ ] Mount filesystems manually: `mount`
+* [ ] Unmount filesystems: `umount`
+* [ ] Use `mount -o` for custom options (e.g., `noatime`, `ro`)
+* [ ] Configure persistent mounts in `/etc/fstab`
+* [ ] Mount filesystems using UUID or label
+
+---
+
+### 🔸 6. Filesystem Maintenance
+
+* [ ] Check and repair filesystems:
+
+  * [ ] `fsck` (for ext-based FS)
+  * [ ] `xfs_repair` (for XFS)
+* [ ] Resize filesystems:
+
+  * [ ] `resize2fs` (for ext)
+  * [ ] `xfs_growfs`
+* [ ] Set file attributes: `chattr`, `lsattr`
+* [ ] Tune filesystem options with `tune2fs`
+
+---
+
+### 🔸 7. Swap Space Management
+
+* [ ] Understand the purpose of swap
+* [ ] Create swap partitions and swap files
+* [ ] Enable/disable swap: `swapon`, `swapoff`
+* [ ] View swap usage: `free`, `swapon --show`
+* [ ] Add swap entries in `/etc/fstab`
+
+---
+
+### 🔸 8. Logical Volume Management (LVM)
+
+* [ ] Understand LVM components: PV, VG, LV
+* [ ] Create physical volumes: `pvcreate`
+* [ ] Create volume groups: `vgcreate`
+* [ ] Create logical volumes: `lvcreate`
+* [ ] Resize LVs:
+
+  * [ ] Extend: `lvextend` + grow filesystem
+  * [ ] Reduce: `lvreduce` + shrink FS (carefully!)
+* [ ] Display volume info: `pvs`, `vgs`, `lvs`
+* [ ] Mount and use LVM volumes
+* [ ] Create and use LVM snapshots
+
+---
+
+### 🔸 9. Disk and Filesystem Usage Monitoring
+
+* [ ] Check overall disk space: `df -h`
+* [ ] Check directory sizes: `du -sh`, `ncdu`
+* [ ] Identify large files
+* [ ] Check inode usage: `df -i`
+* [ ] Monitor I/O performance: `iostat`, `iotop`
+
+---
+
+### 🔸 10. Filesystem Quotas
+
+* [ ] Understand soft vs hard quotas
+* [ ] Enable quota support in filesystem
+* [ ] Use `edquota` to set limits
+* [ ] Use `repquota` to report usage
+* [ ] Use `quotacheck` to scan and update quota database
+
+---
+
+### 🔸 11. Automounting and Removable Media
+
+* [ ] Manually mount USB drives, CDs/DVDs
+* [ ] Use `autofs` for on-demand mounting
+* [ ] Configure `udev` rules for device-based automounting
+* [ ] Mount ISO images using `mount -o loop`
+
+---
+
+### 🔸 12. RAID (Software RAID with `mdadm`)
+
+* [ ] Understand RAID levels (0, 1, 5, 6, 10)
+* [ ] Create RAID arrays with `mdadm`
+* [ ] Monitor RAID with `/proc/mdstat`
+* [ ] Assemble or stop arrays
+* [ ] Replace failed drives and rebuild RAID
+
+---
+
+### 🔸 13. Backup and Recovery Tools
+
+* [ ] Create archives: `tar`, `cpio`
+* [ ] Use `rsync` for incremental backups
+* [ ] Clone disks with `dd`
+* [ ] Mount `.iso` and image files
+
+---
+
+### 🔸 14. Encrypted Filesystems
+
+* [ ] Understand LUKS and full-disk encryption
+* [ ] Encrypt a partition or file container with `cryptsetup`
+* [ ] Open and mount encrypted volumes
+* [ ] Configure auto-mounting of encrypted volumes (optional)
+
+---
+
+### 🔸 15. Network Filesystem Support
+
+* [ ] Mount NFS shares: `mount -t nfs`
+* [ ] Mount SMB/CIFS shares: `mount -t cifs`
+* [ ] Configure persistent mounts for network shares in `/etc/fstab`
+
+---
+
+### 🔸 Bonus Practice Tasks
+
+* [ ] Partition and format a new disk with `ext4`
+* [ ] Create and resize an LVM logical volume
+* [ ] Set up and test disk quotas for a user
+* [ ] Create and mount a swap file
+* [ ] Mount a USB drive using UUID and `/etc/fstab`
+
+---
+</details>
 
 <details>
   <summary>DNS</summary>
