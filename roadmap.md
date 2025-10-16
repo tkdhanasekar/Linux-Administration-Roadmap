@@ -6316,6 +6316,1216 @@
 </details>
 
 <details>
+  <summary>NFS</summary>
+
+---
+
+## **NFS Management Topics**
+
+---
+
+### 1. **Introduction to NFS**
+
+* Purpose and use cases of NFS in networked environments
+* NFS vs other file sharing protocols (e.g., SMB, FTP, SSHFS)
+* NFS architecture: server-client model
+
+---
+
+### 2. **NFS Versions**
+
+* Overview of NFS versions: NFSv2, NFSv3, NFSv4
+* Key differences and improvements in NFSv4
+* Compatibility considerations between versions
+
+---
+
+### 3. **Installing NFS Services**
+
+* Installing NFS server and client packages (`nfs-utils`, `nfs-common`)
+* Verifying required services: `nfs-server`, `rpcbind`, `nfslock`
+
+---
+
+### 4. **Configuring the NFS Server**
+
+* Editing the `/etc/exports` file
+* Exporting directories with specific options (ro, rw, no_root_squash, etc.)
+* Setting export access control (IP address, subnet, hostname)
+* Applying changes with `exportfs`
+
+---
+
+### 5. **Starting and Managing NFS Services**
+
+* Starting, stopping, and enabling NFS-related services
+* Managing services: `nfs-server`, `rpcbind`, `nfs-idmapd`
+* Checking service status and troubleshooting startup
+
+---
+
+### 6. **NFS Client Configuration**
+
+* Mounting NFS shares manually using `mount` command
+* Editing `/etc/fstab` for persistent NFS mounts
+* Understanding mount options (`soft`, `hard`, `intr`, `nolock`, etc.)
+
+---
+
+### 7. **NFSv4 Specific Configuration**
+
+* Configuring NFSv4 domain name and `/etc/idmapd.conf`
+* Using NFSv4 pseudo root
+* Exporting and mounting NFSv4 without `/etc/exports` path dependencies
+* Handling user and group name mapping
+
+---
+
+### 8. **User and Permission Management**
+
+* Understanding how NFS handles file ownership and permissions
+* Role of UID and GID matching between server and client
+* Using `no_root_squash` and `root_squash` options
+* Syncing user/group IDs with NIS/LDAP (optional)
+
+---
+
+### 9. **Firewall and Network Configuration**
+
+* Opening required NFS ports (2049, rpcbind, mountd, etc.)
+* Configuring firewalls (firewalld, iptables, nftables) for NFS
+* Using static ports for NFS and mountd for easier firewall setup
+
+---
+
+### 10. **Security in NFS**
+
+* Restricting access by IP, subnet, or hostname
+* Using `root_squash` to limit root access from clients
+* Implementing Kerberos authentication with NFSv4 (optional/advanced)
+* Using `sec=sys`, `sec=krb5`, `krb5i`, `krb5p` options
+
+---
+
+### 11. **Monitoring and Troubleshooting**
+
+* Viewing active NFS mounts with `showmount` or `nfsstat`
+* Checking logs (`/var/log/messages`, `journalctl`) for NFS errors
+* Diagnosing stale NFS mounts and lock issues
+* Using `rpcinfo` and `netstat` to debug connectivity problems
+
+---
+
+### 12. **NFS Performance Tuning**
+
+* Tuning NFS performance with mount options
+* Adjusting read/write buffer sizes
+* Using async/sync options
+* Monitoring performance with tools like `iotop`, `nfsstat`, `nmon`, `dstat`
+
+---
+
+### 13. **Advanced NFS Configurations**
+
+* Setting up NFS behind NAT or firewalls with fixed ports
+* NFS over TCP vs UDP
+* Using automount (`autofs`) for on-demand mounting
+* Exporting read-only or read-write with user-specific permissions
+
+---
+
+### 14. **NFS Backup and Recovery**
+
+* Backup strategies for NFS shares
+* Restoring shared directories
+* Snapshot integration (with LVM or Btrfs/ZFS) for shared data
+
+---
+
+### 15. **Alternative and Related Technologies**
+
+* Comparison with SMB/CIFS (Samba)
+* When to use NFS vs SSHFS or rsync
+* Combining NFS with high availability solutions (e.g., DRBD, Pacemaker)
+
+---
+
+## ✅ NFS Management in Linux – Comprehensive Study Checklist
+
+---
+
+### 1. **Understanding NFS Basics**
+
+* [ ] Understand the purpose and use cases of NFS
+* [ ] Learn NFS client-server architecture
+* [ ] Identify when to use NFS vs SMB, SSHFS, or rsync
+* [ ] Know the differences between NFSv2, v3, and v4
+
+---
+
+### 2. **Installing NFS Services**
+
+* [ ] Install NFS server (`nfs-utils`, `nfs-kernel-server`, etc.)
+* [ ] Install NFS client tools (`nfs-common`)
+* [ ] Install and configure `rpcbind` and other required services
+
+---
+
+### 3. **Configuring the NFS Server**
+
+* [ ] Edit and manage the `/etc/exports` file
+* [ ] Set correct export options (`rw`, `ro`, `sync`, `async`, etc.)
+* [ ] Restrict exports to specific IPs or hostnames
+* [ ] Use `exportfs -a` and `exportfs -r` to apply changes
+* [ ] Test exported directories with `showmount -e`
+
+---
+
+### 4. **Starting and Managing NFS Services**
+
+* [ ] Start and enable `nfs-server` and related services
+* [ ] Use `systemctl` to manage `nfs-server`, `rpcbind`, `nfs-idmapd`
+* [ ] Verify active exports using `exportfs`
+* [ ] Check the status of NFS services and troubleshoot failures
+
+---
+
+### 5. **Configuring NFS Clients**
+
+* [ ] Mount NFS shares manually using the `mount` command
+* [ ] Add entries to `/etc/fstab` for persistent mounts
+* [ ] Use appropriate mount options (`soft`, `hard`, `intr`, `nolock`, etc.)
+* [ ] Use `showmount` and `mount` to verify client access
+
+---
+
+### 6. **NFSv4 Specific Configuration**
+
+* [ ] Configure NFSv4 pseudo root and `/etc/idmapd.conf`
+* [ ] Understand NFSv4 mount points and unified namespace
+* [ ] Use NFSv4 with or without `/etc/exports` full paths
+* [ ] Resolve identity mapping issues between server and client
+
+---
+
+### 7. **User Permissions and UID/GID Mapping**
+
+* [ ] Understand how file ownership is handled in NFS
+* [ ] Sync user and group IDs between server and clients
+* [ ] Use `root_squash`, `no_root_squash`, `all_squash` options appropriately
+
+---
+
+### 8. **Firewall and Network Access**
+
+* [ ] Open required NFS and RPC ports in `firewalld` or `iptables`
+* [ ] Configure static ports for `mountd`, `statd`, and `lockd`
+* [ ] Verify connectivity using `rpcinfo`, `netstat`, or `ss`
+
+---
+
+### 9. **Security Practices**
+
+* [ ] Restrict NFS access to trusted hosts/networks
+* [ ] Use `root_squash` to limit root privileges from clients
+* [ ] Understand and (optionally) configure NFSv4 with Kerberos:
+
+  * `sec=sys`, `krb5`, `krb5i`, `krb5p`
+* [ ] Monitor access and prevent unauthorized sharing
+
+---
+
+### 10. **Monitoring and Troubleshooting**
+
+* [ ] Use `nfsstat` and `showmount` for monitoring
+* [ ] Check logs (`/var/log/messages`, `journalctl`, etc.) for errors
+* [ ] Detect and fix stale mounts
+* [ ] Use `rpcinfo`, `dmesg`, and client-side logs for debugging
+
+---
+
+### 11. **Performance Tuning**
+
+* [ ] Optimize NFS performance with mount options (`rsize`, `wsize`)
+* [ ] Use `async` or `sync` options wisely
+* [ ] Monitor network and disk I/O to identify bottlenecks
+* [ ] Consider using `autofs` for dynamic mounting
+
+---
+
+### 12. **Using Automount (autofs)**
+
+* [ ] Install and configure `autofs`
+* [ ] Set up `/etc/auto.master` and map files
+* [ ] Verify on-demand mounting and unmounting behavior
+
+---
+
+### 13. **Backup and Recovery**
+
+* [ ] Implement backup strategies for exported directories
+* [ ] Use snapshot tools (LVM, Btrfs, etc.) with NFS shares
+* [ ] Test backup and restore scenarios for shared data
+
+---
+
+### 14. **Advanced Configurations**
+
+* [ ] Export NFS shares with fine-grained permissions
+* [ ] Combine NFS with HA tools (e.g., Pacemaker, DRBD)
+* [ ] Configure cross-platform NFS usage (Linux <-> BSD, macOS)
+* [ ] Enable and test NFS over TCP vs UDP
+
+---
+
+### 15. **Decommissioning and Cleanup**
+
+* [ ] Unmount NFS shares cleanly
+* [ ] Remove entries from `/etc/fstab` and `/etc/exports`
+* [ ] Disable and stop NFS services when no longer needed
+
+---
+
+## Hands-On Exercises in NFS Management
+
+---
+
+### 1. **Install NFS Server and Client Packages**
+
+* Install `nfs-utils` (RHEL/CentOS) or `nfs-kernel-server` (Debian/Ubuntu) on the server.
+* Install `nfs-common` on the client system.
+* Verify installations with `rpm -qa`, `dpkg -l`, or `which`.
+
+---
+
+### 2. **Enable and Start NFS Services**
+
+* Enable and start the following services:
+
+  * `nfs-server`
+  * `rpcbind`
+  * `nfs-idmapd`
+* Use `systemctl` to verify service status.
+
+---
+
+### 3. **Create and Export a Shared Directory**
+
+* Create a directory (e.g., `/srv/nfs/shared`) on the NFS server.
+* Set permissions and ownership appropriately.
+* Edit `/etc/exports` to export the directory with options like:
+
+  * `rw`, `sync`, `no_subtree_check`
+* Run `exportfs -a` to apply exports.
+
+---
+
+### 4. **Verify Exported File Systems**
+
+* Use `exportfs -v` to verify active exports.
+* Use `showmount -e <nfs-server-ip>` from a client to list available exports.
+
+---
+
+### 5. **Mount NFS Share on Client (Temporary Mount)**
+
+* Use the `mount` command to manually mount the NFS share:
+
+  ```
+  mount -t nfs <nfs-server-ip>:/srv/nfs/shared /mnt/nfs
+  ```
+* Verify the mount with `df -h` or `mount`.
+
+---
+
+### 6. **Configure Persistent Mounts (fstab)**
+
+* Edit `/etc/fstab` on the client to auto-mount the NFS share at boot:
+
+  ```
+  <nfs-server-ip>:/srv/nfs/shared  /mnt/nfs  nfs  defaults  0  0
+  ```
+* Reboot or run `mount -a` to test.
+
+---
+
+### 7. **Test File Sharing Between Client and Server**
+
+* On the client, create a file inside the mounted NFS directory.
+* On the server, verify the file was created.
+* Test read/write behavior from multiple clients.
+
+---
+
+### 8. **Experiment with Export Options**
+
+* Modify `/etc/exports` to test options like:
+
+  * `ro`, `rw`, `no_root_squash`, `all_squash`
+* Re-export with `exportfs -ra`.
+* Observe behavior changes from the client side.
+
+---
+
+### 9. **Set Up NFSv4 with Pseudo-Root**
+
+* Configure NFSv4 with a pseudo-root directory (e.g., `/export`).
+* Bind export directories under `/export` using `mount --bind`.
+* Ensure `/etc/exports` contains NFSv4-style paths.
+* Test NFSv4 mount from client:
+
+  ```
+  mount -t nfs4 <nfs-server-ip>:/ /mnt/nfs
+  ```
+
+---
+
+### 10. **Configure and Test `idmapd` for NFSv4**
+
+* Edit `/etc/idmapd.conf` on both server and client.
+* Set the correct `Domain` and `Local-Realms`.
+* Restart `nfs-idmapd` service.
+* Test if usernames (not just UIDs) show up correctly.
+
+---
+
+### 11. **Set Up Firewall Rules for NFS**
+
+* Open required ports for NFS, `rpcbind`, and `mountd`.
+* For example, on firewalld:
+
+  ```
+  firewall-cmd --permanent --add-service=nfs
+  firewall-cmd --reload
+  ```
+* Test connectivity from the client.
+
+---
+
+### 12. **Configure Static NFS Ports (Advanced)**
+
+* Configure fixed ports for `mountd`, `statd`, and `lockd` in `/etc/sysconfig/nfs` or `/etc/nfs.conf`.
+* Update firewall rules accordingly.
+* Restart NFS services and test from client.
+
+---
+
+### 13. **Test Automounting with autofs**
+
+* Install `autofs`.
+* Configure `/etc/auto.master` and `/etc/auto.nfs` map files.
+* Restart `autofs` and test on-demand mounting by accessing mount point.
+
+---
+
+### 14. **Simulate Network Failure or Server Unavailability**
+
+* Unplug or stop the NFS server.
+* Observe behavior on the client (e.g., hanging processes).
+* Use `soft` and `hard` mount options to test differences.
+
+---
+
+### 15. **Monitor NFS Activity and Status**
+
+* Use `nfsstat`, `rpcinfo`, and `ss` to monitor connections.
+* Check `/proc/mounts` and `/proc/fs/nfsfs/volumes`.
+
+---
+
+### 16. **Troubleshoot NFS Issues**
+
+* Test invalid mounts or missing exports.
+* Check logs with `journalctl`, `/var/log/messages`, or `/var/log/syslog`.
+* Use `rpcinfo -p` to list RPC services and ports.
+
+---
+
+### 17. **Backup and Restore Exported Data**
+
+* Use `rsync`, `tar`, or `cp` to back up exported directories.
+* Test restoring data while preserving permissions and timestamps.
+
+---
+
+</details>
+
+<details>
+  <summary>FTP</summary>
+  
+---
+
+## ✅ Topics in FTP Management
+
+---
+
+### 1. **Introduction to FTP**
+
+* What is FTP and how it works (control/data channels)
+* Active vs Passive FTP modes
+* FTP vs SFTP vs FTPS vs SCP
+* Use cases for FTP in enterprise and legacy systems
+
+---
+
+### 2. **FTP Server Software Options**
+
+* Overview of common Linux FTP servers:
+
+  * `vsftpd` (Very Secure FTP Daemon)
+  * `ProFTPD`
+  * `Pure-FTPd`
+* Choosing the right FTP server for your use case
+
+---
+
+### 3. **Installing an FTP Server**
+
+* Installing vsftpd on RHEL/CentOS, Debian/Ubuntu
+* Installing ProFTPD or Pure-FTPd as alternatives
+* Verifying installation and locating configuration files
+
+---
+
+### 4. **Basic FTP Server Configuration**
+
+* Main configuration file locations:
+
+  * `/etc/vsftpd/vsftpd.conf`
+  * `/etc/proftpd/proftpd.conf`
+* Setting FTP root directories (`chroot`)
+* Defining default ports and passive port ranges
+* Allowing or denying anonymous logins
+* Configuring banner messages and logging
+
+---
+
+### 5. **User Management for FTP**
+
+* Configuring local Linux users for FTP access
+* Creating FTP-only users (nologin/shell-less)
+* Configuring chroot jails for individual users
+* Managing upload/download permissions
+
+---
+
+### 6. **Anonymous FTP Configuration**
+
+* Enabling anonymous access securely
+* Restricting permissions (read-only or upload-only)
+* Disabling write access for anonymous users
+
+---
+
+### 7. **Securing FTP Connections**
+
+* Disabling plain FTP; enforcing encryption (FTPS)
+* Configuring vsftpd with TLS/SSL (using OpenSSL certificates)
+* Using passive mode securely with firewalls
+* Hardening user permissions and disabling shell access
+* Logging and auditing access attempts
+
+---
+
+### 8. **Firewall and SELinux Configuration**
+
+* Opening standard FTP and passive port ranges
+* Adjusting `firewalld` or `iptables` for FTP
+* Configuring SELinux policies for vsftpd
+* Using `setsebool` and `semanage` for FTP SELinux rules
+
+---
+
+### 9. **Virtual Users for FTP**
+
+* Setting up virtual FTP users with:
+
+  * PAM
+  * DB-based backends (Berkeley DB, MySQL, etc.)
+* Mapping virtual users to system users or restricted chroot environments
+
+---
+
+### 10. **Logging and Monitoring**
+
+* Location and analysis of FTP logs:
+
+  * `/var/log/vsftpd.log`
+  * `/var/log/xferlog`
+* Monitoring with tools like `logwatch`, `journalctl`, `fail2ban`
+
+---
+
+### 11. **Troubleshooting FTP Issues**
+
+* Diagnosing common issues:
+
+  * Connection timeouts
+  * Login failures
+  * Permission denied errors
+* Using tools like `ftp`, `lftp`, `telnet`, `netstat`, `ss`, `tcpdump`
+* Checking passive/active mode behavior
+
+---
+
+### 12. **FTP Client Configuration**
+
+* Using command-line FTP clients (`ftp`, `lftp`, `ncftp`)
+* Using GUI clients (FileZilla, WinSCP)
+* Automating FTP transfers with scripts
+
+---
+
+### 13. **Performance and Resource Tuning**
+
+* Limiting connections per IP/user
+* Bandwidth throttling (upload/download rates)
+* Timeouts and idle session control
+* Maximum client sessions and queued connections
+
+---
+
+### 14. **Advanced Configuration Topics**
+
+* Configuring virtual hosts in ProFTPD
+* Using MySQL/LDAP authentication with Pure-FTPd
+* Integration with chrooted environments and jail directories
+* Setting per-user or per-IP policies
+
+---
+
+### 15. **Migrating and Replacing FTP**
+
+* Migrating users and data from older FTP servers
+* Planning transition from FTP to SFTP/SCP
+* Decommissioning insecure FTP setups
+
+---
+
+## ✅ FTP Management – Comprehensive Study Checklist
+
+---
+
+### 1. **Understand FTP Basics**
+
+* [ ] Learn FTP protocol fundamentals: control and data connections
+* [ ] Differentiate Active vs Passive FTP modes
+* [ ] Understand FTP vs SFTP vs FTPS vs SCP use cases
+
+---
+
+### 2. **FTP Server Software and Installation**
+
+* [ ] Know popular FTP servers: vsftpd, ProFTPD, Pure-FTPd
+* [ ] Install FTP server packages on major Linux distros
+* [ ] Locate and understand main FTP configuration files
+
+---
+
+### 3. **Basic FTP Server Configuration**
+
+* [ ] Configure FTP root directories and chroot jails
+* [ ] Set default ports and passive port ranges
+* [ ] Enable or disable anonymous FTP access securely
+* [ ] Configure welcome/banner messages and logging
+
+---
+
+### 4. **User Management**
+
+* [ ] Create and configure local users for FTP access
+* [ ] Create FTP-only users without shell access
+* [ ] Configure permissions and chroot environment for users
+* [ ] Manage upload/download rights per user
+
+---
+
+### 5. **Anonymous FTP Setup**
+
+* [ ] Enable anonymous FTP if required
+* [ ] Restrict permissions (read-only or upload-only)
+* [ ] Secure anonymous access to prevent misuse
+
+---
+
+### 6. **Securing FTP**
+
+* [ ] Configure FTPS (FTP over SSL/TLS) with certificates
+* [ ] Disable plain-text FTP where possible
+* [ ] Manage firewall rules for FTP and passive ports
+* [ ] Harden user permissions and disable shell access for FTP users
+* [ ] Set up logging and monitoring for security auditing
+
+---
+
+### 7. **Firewall and SELinux Configuration**
+
+* [ ] Open FTP control and data ports in firewalls (`firewalld`, `iptables`)
+* [ ] Configure SELinux policies for FTP servers
+* [ ] Use `setsebool` and `semanage` commands for FTP-related SELinux booleans
+
+---
+
+### 8. **Virtual User Management**
+
+* [ ] Set up virtual FTP users via PAM or database backends
+* [ ] Map virtual users to system users or restricted directories
+* [ ] Configure authentication mechanisms for virtual users
+
+---
+
+### 9. **Logging and Monitoring**
+
+* [ ] Locate and analyze FTP logs (`vsftpd.log`, `xferlog`)
+* [ ] Use log monitoring tools (`logwatch`, `fail2ban`)
+* [ ] Monitor FTP sessions and active connections
+
+---
+
+### 10. **Troubleshooting FTP Issues**
+
+* [ ] Diagnose common FTP errors: connection refused, permission denied
+* [ ] Troubleshoot passive/active mode connection issues
+* [ ] Use command-line tools (`ftp`, `lftp`, `telnet`, `tcpdump`) for debugging
+* [ ] Review logs and SELinux denials
+
+---
+
+### 11. **FTP Client Usage**
+
+* [ ] Use command-line FTP clients for manual transfers
+* [ ] Understand GUI FTP clients (FileZilla, WinSCP)
+* [ ] Automate FTP transfers using scripts and cron jobs
+
+---
+
+### 12. **Performance Tuning**
+
+* [ ] Limit number of simultaneous connections per user/IP
+* [ ] Set bandwidth limits (upload/download speed throttling)
+* [ ] Configure session timeouts and idle disconnects
+* [ ] Adjust max clients and queued connection parameters
+
+---
+
+### 13. **Advanced FTP Server Configuration**
+
+* [ ] Configure virtual hosts (ProFTPD) for multiple FTP sites
+* [ ] Integrate FTP servers with databases (MySQL, LDAP) for user authentication
+* [ ] Implement per-user or per-group restrictions and quotas
+* [ ] Use jail/chroot environments for enhanced security
+
+---
+
+### 14. **Migration and Alternatives**
+
+* [ ] Plan migration from legacy FTP to SFTP or FTPS
+* [ ] Backup and restore FTP user data and configurations
+* [ ] Understand benefits of SFTP and SCP as secure alternatives to FTP
+
+---
+
+## Hands-On Exercises for FTP Management
+
+---
+
+### 1. **Install FTP Server Software**
+
+* Install vsftpd (or ProFTPD/Pure-FTPd) on your Linux server.
+* Verify installation and locate configuration files.
+
+---
+
+### 2. **Start and Enable FTP Service**
+
+* Start the FTP service (`vsftpd`).
+* Enable it to start automatically on boot.
+* Check service status with `systemctl`.
+
+---
+
+### 3. **Configure Basic FTP Server Settings**
+
+* Edit `/etc/vsftpd/vsftpd.conf` to:
+
+  * Enable/disable anonymous FTP.
+  * Set the FTP root directory.
+  * Enable logging.
+* Restart the service to apply changes.
+
+---
+
+### 4. **Create FTP Users and Set Permissions**
+
+* Create a system user for FTP access.
+* Set appropriate directory ownership and permissions.
+* Restrict users to their home directories (chroot jail).
+
+---
+
+### 5. **Configure Anonymous FTP Access**
+
+* Enable anonymous login securely.
+* Set upload/download permissions for anonymous users.
+* Test anonymous FTP access from a client.
+
+---
+
+### 6. **Configure Passive Mode and Firewall**
+
+* Configure passive port range in FTP server config.
+* Open FTP and passive ports in firewall (`firewalld` or `iptables`).
+* Test FTP connection in passive mode from client.
+
+---
+
+### 7. **Enable and Configure FTPS (FTP over SSL/TLS)**
+
+* Generate or install SSL certificates.
+* Configure vsftpd for SSL/TLS encrypted FTP.
+* Test secure FTP connection using FTPS client.
+
+---
+
+### 8. **Set Up FTP-Only Users (No Shell Access)**
+
+* Create users with `/sbin/nologin` shell.
+* Configure FTP server to allow these users.
+* Test login and file transfer.
+
+---
+
+### 9. **Configure Virtual FTP Users (Optional)**
+
+* Create a virtual user database (e.g., using PAM).
+* Map virtual users to directories.
+* Test login with virtual FTP users.
+
+---
+
+### 10. **Automate FTP File Transfers**
+
+* Use command-line FTP or `lftp` to upload/download files.
+* Create simple FTP scripts for automated transfers.
+* Schedule FTP transfers using `cron`.
+
+---
+
+### 11. **Monitor FTP Logs and Sessions**
+
+* Locate and analyze FTP logs.
+* Use tools like `tail`, `grep` to filter log entries.
+* Monitor active FTP sessions and connections.
+
+---
+
+### 12. **Troubleshoot Common FTP Issues**
+
+* Simulate and fix permission errors.
+* Diagnose connection failures (firewall, SELinux).
+* Resolve passive vs active mode connection issues.
+
+---
+
+### 13. **Limit FTP Connections and Bandwidth**
+
+* Configure max clients and connections per IP.
+* Set upload/download bandwidth limits.
+* Test connection limits from multiple clients.
+* Quota limits - user , group , project
+
+---
+
+### 14. **Backup and Restore FTP Configuration and Data**
+
+* Backup FTP server config files and user directories.
+* Restore from backup and verify service functionality.
+
+---
+
+</details>
+
+<details>
+  <summary>SAMBA</summary>
+
+---
+
+## Topics in Samba Management
+
+---
+
+### 1. **Introduction to Samba**
+
+* Overview of Samba and SMB/CIFS protocol
+* Samba use cases in Linux and Windows interoperability
+* Differences between Samba and NFS
+
+---
+
+### 2. **Installing Samba**
+
+* Installing Samba packages on various Linux distributions
+* Understanding Samba server components (`smbd`, `nmbd`, `winbindd`)
+* Verifying installation and service status
+
+---
+
+### 3. **Samba Configuration Basics**
+
+* Samba configuration file: `/etc/samba/smb.conf`
+* Global section configuration parameters
+* Defining shares and share-specific parameters
+* Configuring workgroups and server role (standalone, domain member, AD DC)
+
+---
+
+### 4. **User and Authentication Management**
+
+* Samba users vs Linux users
+* Adding and managing Samba users with `smbpasswd`
+* Configuring passdb backends (tdbsam, smbpasswd, ldapsam)
+* Integrating Samba with system authentication (PAM, NSS)
+
+---
+
+### 5. **File Sharing Configuration**
+
+* Creating and configuring share definitions
+* Setting permissions and access control (read-only, read-write)
+* Configuring guest access and anonymous shares
+* Setting valid users, write list, and other access restrictions
+
+---
+
+### 6. **Print Sharing**
+
+* Configuring Samba as a print server
+* Sharing printers over SMB
+* Managing printer permissions and options
+
+---
+
+### 7. **Integration with Windows Networks**
+
+* Joining Samba to an Active Directory domain
+* Using `winbind` for user and group mapping
+* Configuring Kerberos for authentication
+* Managing Samba as a Domain Controller (NT4 style or Active Directory DC)
+
+---
+
+### 8. **Security and Hardening**
+
+* Securing Samba with proper permissions
+* Encrypting SMB communication
+* Using firewalls and SELinux with Samba
+* Restricting access with hosts allow/deny and `smb.conf` settings
+
+---
+
+### 9. **Samba Services and Daemons**
+
+* Understanding roles of `smbd`, `nmbd`, and `winbindd`
+* Starting, stopping, enabling Samba services
+* Troubleshooting Samba daemons
+
+---
+
+### 10. **Monitoring and Logging**
+
+* Samba log files location and configuration
+* Using `testparm` to check configuration syntax
+* Monitoring Samba connections and shares
+* Analyzing logs for troubleshooting
+
+---
+
+### 11. **Performance Tuning**
+
+* Optimizing Samba parameters for performance
+* Managing concurrent connections
+* Adjusting socket options and cache settings
+
+---
+
+### 12. **Backup and Recovery**
+
+* Backing up Samba configuration and data
+* Restoring shares and user databases
+
+---
+
+### 13. **Advanced Samba Configuration**
+
+* VFS modules and custom extensions
+* Samba clustering and replication options
+* Configuring DFS (Distributed File System) shares
+
+---
+
+### 14. **Troubleshooting Samba**
+
+* Common Samba errors and fixes
+* Diagnosing connectivity and permission issues
+* Using tools like `smbclient`, `smbstatus`, `rpcclient`
+
+---
+
+## ✅ Samba Management – Comprehensive Study Checklist
+
+---
+
+### 1. **Understand Samba Basics**
+
+* [ ] Learn Samba architecture and SMB/CIFS protocol fundamentals
+* [ ] Understand Samba’s role in Linux-Windows interoperability
+* [ ] Differentiate Samba from other file sharing protocols like NFS
+
+---
+
+### 2. **Install Samba**
+
+* [ ] Install Samba packages on major Linux distributions
+* [ ] Understand the roles of `smbd`, `nmbd`, and `winbindd` daemons
+* [ ] Verify installation and service status
+
+---
+
+### 3. **Configure Samba**
+
+* [ ] Locate and understand the `/etc/samba/smb.conf` configuration file
+* [ ] Configure global settings (workgroup, server role, netbios name)
+* [ ] Define and configure file and printer shares
+* [ ] Set appropriate permissions and access controls for shares
+
+---
+
+### 4. **Manage Users and Authentication**
+
+* [ ] Add and manage Samba users with `smbpasswd`
+* [ ] Understand Samba user vs Linux system user concepts
+* [ ] Configure passdb backends (tdbsam, smbpasswd, ldapsam)
+* [ ] Integrate Samba with system authentication services (PAM, NSS)
+
+---
+
+### 5. **Configure File Sharing**
+
+* [ ] Set up read-only and read-write shares
+* [ ] Configure guest and anonymous access securely
+* [ ] Manage valid users, write lists, and deny lists for shares
+
+---
+
+### 6. **Set Up Print Sharing**
+
+* [ ] Configure Samba as a print server
+* [ ] Share printers over SMB protocol
+* [ ] Manage printer permissions and options
+
+---
+
+### 7. **Integrate Samba with Windows Networks**
+
+* [ ] Join Samba to an Active Directory domain
+* [ ] Configure and use `winbind` for user and group mapping
+* [ ] Set up Kerberos authentication for Samba
+* [ ] Configure Samba as an NT4-style domain controller or Active Directory DC
+
+---
+
+### 8. **Secure Samba**
+
+* [ ] Harden Samba configuration for security
+* [ ] Enable encryption for SMB communication
+* [ ] Configure firewall rules for Samba ports
+* [ ] Manage SELinux policies related to Samba
+* [ ] Use hosts allow/deny and other access restrictions in `smb.conf`
+
+---
+
+### 9. **Manage Samba Services**
+
+* [ ] Understand the functions of `smbd`, `nmbd`, and `winbindd`
+* [ ] Start, stop, restart, and enable Samba services at boot
+* [ ] Troubleshoot common daemon issues
+
+---
+
+### 10. **Monitor and Log Samba Activity**
+
+* [ ] Configure Samba logging levels and log file locations
+* [ ] Use `testparm` to validate Samba configuration
+* [ ] Monitor active Samba sessions and shares (`smbstatus`)
+* [ ] Analyze logs for troubleshooting connection and permission problems
+
+---
+
+### 11. **Tune Samba Performance**
+
+* [ ] Optimize Samba socket options and cache settings
+* [ ] Adjust limits on concurrent connections
+* [ ] Fine-tune Samba parameters for workload demands
+
+---
+
+### 12. **Backup and Restore Samba Configuration**
+
+* [ ] Backup `/etc/samba/smb.conf` and Samba user databases
+* [ ] Plan and test restoration of Samba configuration and data
+
+---
+
+### 13. **Advanced Samba Features**
+
+* [ ] Explore VFS modules for extended functionality
+* [ ] Understand Samba clustering and replication options
+* [ ] Configure DFS (Distributed File System) shares for enterprise setups
+
+---
+
+### 14. **Troubleshoot Samba**
+
+* [ ] Diagnose and resolve common Samba errors
+* [ ] Use diagnostic tools: `smbclient`, `smbstatus`, `rpcclient`, `wbinfo`
+* [ ] Troubleshoot connectivity, permission, and authentication issues
+
+---
+
+## Hands-On Exercises in Samba Management
+
+---
+
+### 1. **Install Samba Server**
+
+* Install Samba packages on your Linux system (`yum`, `apt`, or `dnf`).
+* Verify the installation and check Samba service status.
+
+---
+
+### 2. **Start and Enable Samba Services**
+
+* Start `smbd` and `nmbd` services.
+* Enable Samba services to start on boot.
+* Verify service status using `systemctl`.
+
+---
+
+### 3. **Configure Basic Samba Settings**
+
+* Edit `/etc/samba/smb.conf` to set:
+
+  * Workgroup name
+  * Server description
+  * NetBIOS name
+* Restart Samba and test configuration with `testparm`.
+
+---
+
+### 4. **Create and Share a Directory**
+
+* Create a directory to be shared.
+* Configure a basic Samba share in `smb.conf`.
+* Set appropriate filesystem permissions.
+* Restart Samba and access the share from a Linux or Windows client.
+
+---
+
+### 5. **Add Samba Users**
+
+* Add system users to the Linux server.
+* Add corresponding Samba users with `smbpasswd`.
+* Test authentication using `smbclient` from the command line.
+
+---
+
+### 6. **Configure Share Permissions**
+
+* Set read-only and read-write permissions for different users.
+* Configure `valid users`, `write list`, and `browseable` options in `smb.conf`.
+* Test access restrictions from clients.
+
+---
+
+### 7. **Enable Guest and Anonymous Access**
+
+* Configure a guest-accessible share.
+* Test anonymous access from client machines.
+* Secure guest shares by limiting permissions.
+
+---
+
+### 8. **Set Up Samba Print Server**
+
+* Configure Samba to share a local printer.
+* Share the printer via Samba.
+* Test printing from a Windows or Linux client.
+
+---
+
+### 9. **Join Samba Server to Active Directory Domain**
+
+* Configure Kerberos client on the Linux server.
+* Join Samba to an AD domain using `net ads join`.
+* Verify domain membership and access domain resources.
+
+---
+
+### 10. **Configure Winbind for Authentication**
+
+* Install and configure `winbind`.
+* Test user and group lookup with `wbinfo` and `getent`.
+* Configure PAM for winbind authentication.
+
+---
+
+### 11. **Configure and Use Samba as a Domain Controller**
+
+* Set Samba server as an NT4-style domain controller.
+* Add users and groups to Samba domain.
+* Join Windows clients to the Samba domain.
+
+---
+
+### 12. **Secure Samba Configuration**
+
+* Configure firewall rules to allow SMB ports.
+* Set SELinux booleans for Samba if enabled.
+* Restrict access with `hosts allow/deny` directives.
+* Enable SMB encryption if supported.
+
+---
+
+### 13. **Monitor Samba Logs and Sessions**
+
+* Locate Samba log files and increase logging verbosity if needed.
+* Use `smbstatus` to monitor active connections and locks.
+* Analyze logs to troubleshoot issues.
+
+---
+
+### 14. **Troubleshoot Samba Issues**
+
+* Diagnose permission issues and fix them.
+* Troubleshoot connectivity problems with `ping`, `telnet`, and `rpcclient`.
+* Use `testparm` to validate Samba configuration.
+
+---
+
+### 15. **Backup and Restore Samba Configuration**
+
+* Backup Samba configuration files and user databases.
+* Restore configuration from backup and verify functionality.
+
+---
+
+</details>
+
+
+
+
+
+<details>
   <summary>****</summary>
 
 </details>
