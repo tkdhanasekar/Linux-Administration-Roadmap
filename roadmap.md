@@ -8910,7 +8910,7 @@
 
 ---
 
-# ✅ SSL/TLS Comprehensive Study Checklist
+## SSL/TLS Comprehensive Study Checklist
 
 ---
 
@@ -9003,7 +9003,7 @@
 
 ---
 
-# ✅ Let’s Encrypt Comprehensive Study Checklist
+## Let’s Encrypt Comprehensive Study Checklist
 
 ---
 
@@ -9293,7 +9293,7 @@
 
 ---
 
-# ✅ LDAP Management Comprehensive Study Checklist
+##  LDAP Management Comprehensive Study Checklist
 
 ---
 
