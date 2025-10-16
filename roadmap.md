@@ -9464,8 +9464,647 @@
 </details>
 
 
+<details>
+  <summary>Kerberos</summary>
 
+---
 
+## Topics in Kerberos
+
+---
+
+### 1. **Introduction to Kerberos**
+
+* Overview of Kerberos authentication protocol
+* Components of Kerberos: KDC, TGT, service tickets
+* Key terms: realm, principals, keytabs, tickets
+
+---
+
+### 2. **Kerberos Architecture and Workflow**
+
+* How Kerberos authentication works
+* Ticket Granting Ticket (TGT) and Service Ticket (TGS)
+* Understanding mutual authentication
+* Role of time synchronization in Kerberos
+
+---
+
+### 3. **Installing Kerberos**
+
+* Installing Kerberos server (`krb5-kdc`, `krb5-admin-server`)
+* Installing Kerberos client (`krb5-user`, `libkrb5`)
+* Required configuration files: `krb5.conf`, `kdc.conf`, and `kadm5.acl`
+
+---
+
+### 4. **Kerberos Realm Configuration**
+
+* Setting up a new Kerberos realm
+* Defining default realms and domain-to-realm mappings
+* Creating and configuring the Kerberos database
+* Initializing the KDC
+
+---
+
+### 5. **User and Service Principal Management**
+
+* Creating and managing user principals using `kadmin`
+* Creating service principals for applications (e.g., HTTP, SSH)
+* Using `ktadd` to generate and export keytab files
+* Listing, deleting, and modifying principals
+
+---
+
+### 6. **Keytab File Management**
+
+* Understanding keytab file purpose and format
+* Creating keytabs for automated service authentication
+* Securely storing and using keytab files
+
+---
+
+### 7. **Kerberos Client Configuration**
+
+* Configuring Linux systems as Kerberos clients
+* Authenticating users via Kerberos using `kinit`, `klist`, `kdestroy`
+* Testing Kerberos login and ticket issuance
+
+---
+
+### 8. **Integrating Kerberos with Linux Services**
+
+* Integrating Kerberos authentication with:
+
+  * SSH
+  * Apache HTTPD
+  * NFSv4 with Kerberos
+  * LDAP and PAM
+* Configuring GSSAPI and SPNEGO for single sign-on (SSO)
+
+---
+
+### 9. **Time Synchronization and DNS Requirements**
+
+* Configuring NTP for Kerberos time sensitivity
+* Proper DNS setup for reverse and forward lookups
+* Using FQDNs for host and service principal names
+
+---
+
+### 10. **Securing Kerberos Infrastructure**
+
+* Using strong encryption types and disabling weak ones
+* Restricting administrative access (`kadm5.acl`)
+* Backing up the Kerberos database securely
+
+---
+
+### 11. **Kerberos Ticket Management**
+
+* Understanding ticket lifetime and renewal policies
+* Modifying default ticket and renewal durations
+* Using `klist` to inspect ticket caches
+
+---
+
+### 12. **Troubleshooting Kerberos**
+
+* Analyzing logs: `/var/log/krb5kdc.log`, `/var/log/auth.log`
+* Common errors: clock skew, ticket expired, service not found
+* Debugging with verbose `kinit`, `klist`, `kvno`, etc.
+* Validating principal and keytab issues
+
+---
+
+## **Kerberos Management – Comprehensive Study Checklist**
+
+---
+
+### 1. **Kerberos Fundamentals**
+
+* [ ] Understand what Kerberos is and why it's used
+* [ ] Learn the key Kerberos components: KDC, TGS, TGT, principal, realm, keytab
+* [ ] Study the Kerberos authentication flow
+* [ ] Understand the importance of synchronized time in Kerberos
+
+---
+
+### 2. **Install and Configure Kerberos Server**
+
+* [ ] Install `krb5-kdc` and `krb5-admin-server`
+* [ ] Configure `/etc/krb5.conf`, `/etc/krb5kdc/kdc.conf`, and `kadm5.acl`
+* [ ] Initialize the Kerberos database with `kdb5_util`
+* [ ] Start and enable the KDC and admin services
+
+---
+
+### 3. **Configure a Kerberos Realm**
+
+* [ ] Define a realm and domain-to-realm mappings in `krb5.conf`
+* [ ] Set up a fully qualified domain name (FQDN) for the server
+* [ ] Configure proper reverse and forward DNS resolution
+* [ ] Ensure NTP (time synchronization) is enabled and working
+
+---
+
+### 4. **Create and Manage Principals**
+
+* [ ] Use `kadmin.local` or `kadmin` to create user and host principals
+* [ ] Understand principal naming conventions (e.g., `user@REALM`, `host/server.domain@REALM`)
+* [ ] Modify or delete principals as needed
+* [ ] Set and manage principal passwords and policies
+
+---
+
+### 5. **Generate and Use Keytab Files**
+
+* [ ] Create keytab files for service principals using `ktadd`
+* [ ] Securely store and manage keytab files
+* [ ] Use `ktutil` for editing keytabs manually
+* [ ] Use `klist -k` to verify keytab contents
+
+---
+
+### 6. **Configure Kerberos Clients**
+
+* [ ] Install Kerberos client tools (`krb5-user`, `libkrb5`)
+* [ ] Configure `/etc/krb5.conf` on client systems
+* [ ] Authenticate using `kinit`, verify tickets with `klist`
+* [ ] Use `kdestroy` to clear tickets
+
+---
+
+### 7. **Integrate Kerberos with Linux Services**
+
+* [ ] Configure SSH to support GSSAPI-based Kerberos authentication
+* [ ] Integrate Apache HTTPD or Nginx with Kerberos (via `mod_auth_kerb`)
+* [ ] Set up NFSv4 with Kerberos security (`sec=krb5`, `krb5p`)
+* [ ] Configure PAM and NSS for system-wide Kerberos login
+* [ ] Integrate Kerberos with LDAP (e.g., FreeIPA or 389 Directory Server)
+
+---
+
+### 8. **Security and Policies**
+
+* [ ] Enforce strong encryption types (AES over DES/RC4)
+* [ ] Set ticket lifetime and renewal policies
+* [ ] Restrict administrative access via `kadm5.acl`
+* [ ] Enable logging and auditing for security events
+
+---
+
+### 9. **Backup and Disaster Recovery**
+
+* [ ] Backup the Kerberos database regularly (`kdb5_util dump`)
+* [ ] Securely store backup keytab and configuration files
+* [ ] Test restore using `kdb5_util load`
+
+---
+
+### 10. **Monitoring and Troubleshooting**
+
+* [ ] Monitor logs: `/var/log/krb5kdc.log`, `/var/log/auth.log`, `/var/log/secure`
+* [ ] Troubleshoot common issues: clock skew, principal not found, expired tickets
+* [ ] Use debugging flags with `kinit`, `klist`, `kvno`, and `kadmin`
+* [ ] Use `tcpdump` or `Wireshark` to inspect Kerberos traffic if needed
+
+---
+
+## Hands-On Exercises in Kerberos 
+
+---
+
+### 1. **Install and Set Up a Kerberos Server (KDC)**
+
+* Install the required Kerberos packages (`krb5-kdc`, `krb5-admin-server`)
+* Configure `/etc/krb5.conf`, `/etc/krb5kdc/kdc.conf`, and `/etc/krb5kdc/kadm5.acl`
+* Initialize the Kerberos database using `kdb5_util`
+* Start and enable the KDC and Kerberos admin server services
+
+---
+
+### 2. **Create a Kerberos Realm**
+
+* Define a new Kerberos realm (e.g., `EXAMPLE.COM`)
+* Set up domain-to-realm mapping in `/etc/krb5.conf`
+* Verify hostname and DNS settings match your Kerberos realm requirements
+
+---
+
+### 3. **Create User and Host Principals**
+
+* Use `kadmin.local` or `kadmin` to:
+
+  * Create user principals (e.g., `user1@EXAMPLE.COM`)
+  * Create host principals (e.g., `host/server.example.com@EXAMPLE.COM`)
+* Set passwords and test `kinit` for ticket acquisition
+
+---
+
+### 4. **Generate and Use Keytab Files**
+
+* Generate a keytab file for a host or service using `ktadd`
+* Use `klist -k` to verify the contents of the keytab
+* Authenticate a service using the keytab instead of password
+
+---
+
+### 5. **Set Up a Kerberos Client**
+
+* Install Kerberos client tools (`krb5-user`, `libkrb5`)
+* Configure `/etc/krb5.conf` on the client
+* Test authentication with `kinit`, check tickets with `klist`, clear with `kdestroy`
+
+---
+
+### 6. **Configure SSH with Kerberos (GSSAPI)**
+
+* Enable `GSSAPIAuthentication yes` in `sshd_config`
+* Ensure the host principal and keytab are present on the server
+* Test SSH login using Kerberos authentication from a client
+
+---
+
+### 7. **Configure Kerberos Authentication for Linux Login**
+
+* Set up PAM to authenticate Linux users using Kerberos
+* Use `authconfig`, `pam_krb5`, or `sssd` for integration
+* Test login from a local terminal or remote SSH session
+
+---
+
+### 8. **Secure Kerberos with TLS/Strong Encryption**
+
+* Configure supported encryption types in `kdc.conf` and `krb5.conf`
+* Remove deprecated types (like DES, RC4)
+* Restart services and validate encryption during ticket requests
+
+---
+
+### 9. **Set Ticket Lifetime and Policies**
+
+* Set default ticket and renewal lifetimes
+* Create a password policy in `kadmin` and apply it to a user principal
+* Test password expiration and account lockout
+
+---
+
+### 10. **Backup and Restore the Kerberos Database**
+
+* Backup the KDC database using `kdb5_util dump`
+* Stop the KDC, wipe the database, and restore using `kdb5_util load`
+* Restart and verify data integrity
+
+---
+
+### 11. **Monitor and Troubleshoot Kerberos**
+
+* Check Kerberos logs (`/var/log/krb5kdc.log`, `/var/log/auth.log`)
+* Simulate common issues: wrong time, incorrect realm, missing keytab
+* Use verbose output with `kinit`, `kvno`, `klist`, `kadmin` for debugging
+
+---
+
+### 12. **Integrate Kerberos with NFS or Apache**
+
+* Configure NFSv4 with `sec=krb5` or `krb5p` for secure shares
+* Configure Apache HTTP server with Kerberos (using `mod_auth_kerb` or `mod_auth_gssapi`)
+* Test Kerberos SSO access to web or file services
+
+---
+
+</details>
+
+<details>
+  <summary>PAM</summary>
+  
+---
+
+## Topics in PAM (Pluggable Authentication Modules)
+
+---
+
+### 1. **Introduction to PAM**
+
+* What is PAM and why it is used
+* PAM architecture and role in Linux authentication
+* PAM-enabled services and applications
+
+---
+
+### 2. **PAM Configuration Files and Structure**
+
+* `/etc/pam.d/` directory and individual service files
+* The structure of PAM configuration lines: module-type, control-flag, module-path, arguments
+* Reading and understanding `/etc/pam.d/common-auth`, `common-account`, `common-password`, `common-session` (Debian-based systems)
+
+---
+
+### 3. **PAM Module Types**
+
+* `auth` – Authentication of users
+* `account` – Authorization and account validity
+* `password` – Password updating and checking
+* `session` – Session setup and cleanup
+
+---
+
+### 4. **PAM Control Flags**
+
+* `required`
+* `requisite`
+* `sufficient`
+* `optional`
+* The meaning and effects of each control flag in decision making
+
+---
+
+### 5. **Commonly Used PAM Modules**
+
+* `pam_unix.so` – Standard UNIX authentication
+* `pam_env.so` – Set user environment variables
+* `pam_tally2.so` / `pam_faillock.so` – Account lockout policies
+* `pam_securetty.so` – Restrict root login to secure terminals
+* `pam_limits.so` – Enforce resource limits
+* `pam_listfile.so` – Allow or deny access based on a list
+* `pam_exec.so` – Execute custom scripts
+* `pam_ldap.so` / `pam_sss.so` – LDAP or SSSD integration
+* `pam_mkhomedir.so` – Automatically create home directories
+* `pam_shells.so` – Validate login shells
+
+---
+
+### 6. **PAM Authentication Flow**
+
+* How PAM processes module stacks
+* Interaction of control flags and return codes
+* Stack evaluation and decision flow
+
+---
+
+### 7. **Configuring and Testing PAM for Services**
+
+* Modifying PAM policies for `sshd`, `login`, `sudo`, `su`, `passwd`, etc.
+* Enabling/disabling modules for specific services
+* Testing PAM authentication and access behavior
+
+---
+
+### 8. **Security Policies with PAM**
+
+* Enforcing strong password policies with `pam_cracklib` or `pam_pwquality`
+* Setting login failure limits and lockout mechanisms
+* Restricting shell access using `pam_shells`
+* Restricting logins by user/group with `pam_listfile`
+
+---
+
+### 9. **Integrating PAM with Central Authentication Systems**
+
+* Using PAM with LDAP
+* Using PAM with Kerberos
+* Using PAM with Active Directory via SSSD
+
+---
+
+### 10. **Troubleshooting PAM**
+
+* Understanding PAM log messages in `/var/log/auth.log` or `/var/log/secure`
+* Diagnosing access denials or login issues
+* Safe recovery from misconfigured PAM (e.g., regaining root access via single-user mode)
+
+---
+
+## PAM (Pluggable Authentication Modules) – Comprehensive Study Checklist
+
+---
+
+### 1. **PAM Fundamentals**
+
+* [ ] Understand what PAM is and its role in Linux authentication
+* [ ] Learn the modular structure of PAM (stacked processing)
+* [ ] Identify PAM-aware services on your system (e.g., SSH, login, sudo)
+
+---
+
+### 2. **PAM Configuration Structure**
+
+* [ ] Explore the `/etc/pam.d/` directory and identify individual service files
+* [ ] Understand how PAM reads configuration files (per-service vs common files)
+* [ ] Learn the format of PAM lines:
+  `module-type  control-flag  module-path  [arguments]`
+
+---
+
+### 3. **PAM Module Types**
+
+* [ ] `auth` – Authentication (passwords, biometrics, etc.)
+* [ ] `account` – Authorization and account limitations
+* [ ] `password` – Password updating and complexity
+* [ ] `session` – Session initialization and cleanup
+
+---
+
+### 4. **PAM Control Flags**
+
+* [ ] Understand how these flags affect authentication outcomes:
+
+  * `required`
+  * `requisite`
+  * `sufficient`
+  * `optional`
+* [ ] Test combinations of flags to understand evaluation logic
+
+---
+
+### 5. **Common PAM Modules and Use Cases**
+
+* [ ] `pam_unix.so` – Standard Linux authentication
+* [ ] `pam_env.so` – Load user environment variables
+* [ ] `pam_limits.so` – Enforce user resource limits
+* [ ] `pam_listfile.so` – Allow/deny users based on lists
+* [ ] `pam_tally2.so` / `pam_faillock.so` – Limit failed login attempts
+* [ ] `pam_pwquality.so` or `pam_cracklib.so` – Password strength
+* [ ] `pam_mkhomedir.so` – Auto-create home directories on login
+* [ ] `pam_exec.so` – Run custom scripts during auth/session
+
+---
+
+### 6. **Service-Level PAM Configuration**
+
+* [ ] Customize PAM settings for:
+
+  * `sshd`
+  * `login`
+  * `sudo`
+  * `passwd`
+  * `su`
+* [ ] Disable or restrict access to specific services using PAM
+* [ ] Use `pam.d/other` to define default behavior for unknown services (with caution)
+
+---
+
+### 7. **Security Hardening with PAM**
+
+* [ ] Configure account lockout after failed login attempts
+* [ ] Restrict root login to secure terminals (`pam_securetty`)
+* [ ] Enforce strong password policies
+* [ ] Restrict logins to certain users/groups (`pam_listfile`, `pam_access`)
+
+---
+
+### 8. **Integration with External Authentication**
+
+* [ ] Integrate PAM with **LDAP** using `pam_ldap.so`
+* [ ] Integrate PAM with **Kerberos** using `pam_krb5.so`
+* [ ] Configure **SSSD** (`pam_sss.so`) for central authentication
+* [ ] Use `pam_mkhomedir.so` with LDAP or SSSD to create home directories
+
+---
+
+### 9. **Troubleshooting and Logging**
+
+* [ ] Monitor PAM-related messages in `/var/log/auth.log` or `/var/log/secure`
+* [ ] Use `pam_debug.so` for verbose logging during testing
+* [ ] Safely test changes on non-critical services or in a VM
+* [ ] Learn how to recover from misconfiguration (e.g., boot into rescue mode)
+
+---
+
+### 10. **Best Practices**
+
+* [ ] Always backup PAM config files before changes
+* [ ] Use comments (`#`) to document changes in PAM files
+* [ ] Test changes with a second terminal open in case of lockout
+* [ ] Avoid changing core files like `pam_unix.so` directly unless necessary
+
+---
+
+## Hands-On Exercises in PAM
+
+---
+
+### 1. **Explore PAM Configuration Files**
+
+* Open and review contents of `/etc/pam.d/`
+* Identify PAM configurations for services like `login`, `sshd`, `sudo`, `passwd`, `su`
+* Locate and review `common-auth`, `common-account`, etc. (on Debian-based systems)
+
+---
+
+### 2. **Test `pam_unix.so` Authentication**
+
+* Modify the `auth` section in a PAM-enabled service (e.g., `sudo`)
+* Observe authentication flow using `pam_unix.so`
+* Test successful and failed logins
+
+---
+
+### 3. **Implement Login Access Control with `pam_listfile.so`**
+
+* Create a user deny list file
+* Configure `pam_listfile.so` to block users from accessing a service (e.g., `su` or `ssh`)
+* Test login attempts for denied and allowed users
+
+---
+
+### 4. **Enforce Password Complexity with `pam_pwquality.so`**
+
+* Configure `/etc/security/pwquality.conf`
+* Modify `common-password` (Debian) or relevant PAM stack to include `pam_pwquality.so`
+* Test password changes and confirm enforcement
+
+---
+
+### 5. **Set Up Login Attempt Lockouts Using `pam_tally2.so` or `pam_faillock.so`**
+
+* Configure login failure lockout policies
+* Trigger failed login attempts to simulate account lockout
+* Reset tally count using `pam_tally2 --reset` or `faillock --reset`
+
+---
+
+### 6. **Auto-Create Home Directories Using `pam_mkhomedir.so`**
+
+* Add `pam_mkhomedir.so` to the `session` section of the PAM stack
+* Authenticate with a user whose home directory doesn’t exist
+* Verify automatic creation of the home directory on login
+
+---
+
+### 7. **Restrict Root Login Using `pam_securetty.so`**
+
+* Modify `pam_securetty.so` to limit root access to specific TTYs
+* Attempt root login from allowed and disallowed terminals
+
+---
+
+### 8. **Set Per-User Resource Limits Using `pam_limits.so`**
+
+* Edit `/etc/security/limits.conf` to define resource limits
+* Configure `pam_limits.so` in the `session` section
+* Test limits by switching to the user and running commands that hit the limits
+
+---
+
+### 9. **Integrate PAM with LDAP (Optional)**
+
+* Install and configure `libpam-ldap` or `pam_ldap.so`
+* Bind to an existing LDAP directory
+* Test user authentication via LDAP
+
+---
+
+### 10. **Integrate PAM with Kerberos (Optional)**
+
+* Install Kerberos packages
+* Configure `pam_krb5.so` in the appropriate PAM service stack
+* Authenticate users using Kerberos credentials
+
+---
+
+### 11. **Use `pam_exec.so` to Run Scripts on Login**
+
+* Write a simple shell script (e.g., log login times to a file)
+* Use `pam_exec.so` in the `session` section to call the script
+* Log in and verify that the script executes
+
+---
+
+### 12. **Configure and Test `pam_access.so` Rules**
+
+* Edit `/etc/security/access.conf` to allow/deny user access
+* Configure `pam_access.so` in the `account` section of a service
+* Test access rules based on user and origin
+
+---
+
+### 13. **Simulate and Recover from PAM Misconfiguration**
+
+* Break a PAM configuration (e.g., by misspelling a module)
+* Get locked out and recover using a live CD, rescue mode, or another TTY
+* Restore correct configuration from backup
+
+---
+
+### 14. **Enable Verbose Logging for Troubleshooting**
+
+* Enable `pam_debug.so` in the stack for a test service
+* Authenticate and review logs in `/var/log/auth.log` or `/var/log/secure`
+* Understand success/failure flow of module stack
+
+---
+
+### 15. **Experiment with Custom PAM Stack for a Dummy Service**
+
+* Create a custom service file under `/etc/pam.d/mytest`
+* Use `login -f <username> --service mytest` (or a custom app) to trigger it
+* Try different modules and control flags to observe behavior
+
+---
+
+</details>
 
 
 <details>
