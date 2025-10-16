@@ -489,8 +489,8 @@
 * [ ] Write a shell script to check for and install missing packages
 
 ---
-</details>
 
+</details>
 
 <details>
   <summary>File and Directory Management</summary>
@@ -4860,6 +4860,635 @@
 
 </details>
 
+### **Services Management**
+
+<details>
+  <summary>Apache</summary>
+
+---
+
+## Topics in Apache Web Server
+
+---
+
+### 1. **Introduction to Apache**
+
+* Overview of Apache HTTP Server (httpd)
+* Apache vs. other web servers (Nginx, Lighttpd)
+* Understanding Apache's role in the LAMP stack (Linux, Apache, MySQL, PHP)
+
+---
+
+### 2. **Installing Apache**
+
+* Installing Apache on major Linux distributions (Debian/Ubuntu: `apache2`, RHEL/CentOS: `httpd`)
+* Managing Apache service (`systemctl start|stop|restart httpd/apache2`)
+* Checking Apache version and modules
+
+---
+
+### 3. **Apache Directory Structure and Files**
+
+* Key configuration files:
+
+  * `/etc/httpd/` (RedHat-based)
+  * `/etc/apache2/` (Debian-based)
+* Main config file: `httpd.conf` or `apache2.conf`
+* Site configuration files: `sites-available/` and `sites-enabled/`
+* Log files: `access.log`, `error.log`
+
+---
+
+### 4. **Basic Apache Configuration**
+
+* Setting the server name and admin email
+* Configuring the document root (`DocumentRoot`)
+* Creating and serving a basic HTML page
+* Customizing directory index and error documents
+
+---
+
+### 5. **Virtual Hosts (Name-Based and IP-Based)**
+
+* Creating virtual hosts for multiple websites on the same server
+* Name-based vs. IP-based virtual hosting
+* Enabling and disabling virtual sites (`a2ensite`, `a2dissite`)
+* Testing and troubleshooting virtual host configuration
+
+---
+
+### 6. **Modules and Extensions**
+
+* Understanding Apache’s modular architecture
+* Enabling and disabling modules (`a2enmod`, `a2dismod`)
+* Common modules: `mod_ssl`, `mod_rewrite`, `mod_proxy`, `mod_headers`, `mod_security`
+
+---
+
+### 7. **Security Configuration**
+
+* Restricting directory access (`Allow`, `Deny`, `Require`)
+* Using `.htaccess` files and `AllowOverride`
+* Configuring HTTPS with SSL/TLS (`mod_ssl`)
+* Creating and using self-signed or Let's Encrypt SSL certificates
+* Setting up basic authentication (`htpasswd`)
+
+---
+
+### 8. **Performance Tuning**
+
+* Managing MaxClients, KeepAlive, Timeout settings
+* Caching configuration (`mod_cache`, `mod_expires`)
+* Compression with `mod_deflate`
+* Load balancing with `mod_proxy_balancer`
+
+---
+
+### 9. **Logging and Monitoring**
+
+* Access and error logs (`access.log`, `error.log`)
+* LogFormat and CustomLog directives
+* Using tools like `goaccess`, `awk`, `grep`, `webalizer` for log analysis
+
+---
+
+### 10. **URL Rewriting and Redirection**
+
+* Using `mod_rewrite` for clean URLs and redirects
+* Creating rewrite rules with `.htaccess` or main config
+* Implementing 301/302 redirects
+
+---
+
+### 11. **Hosting Dynamic Content**
+
+* Running PHP with Apache (`mod_php`, FastCGI)
+* Integrating Apache with other languages (Python via WSGI, Perl, etc.)
+* CGI configuration basics
+
+---
+
+### 12. **Access Control and Security Hardening**
+
+* Directory protection with `.htaccess`
+* Hiding Apache version and OS info
+* Disabling unnecessary modules
+* Preventing directory listing
+* Rate limiting with `mod_evasive` or `mod_security`
+
+---
+
+### 13. **Backup and Restore**
+
+* Backing up Apache config files
+* Restoring and testing configuration
+* Version control with Git or manual backups
+
+---
+
+### 14. **Troubleshooting Apache**
+
+* Diagnosing config errors and failed starts
+* Interpreting Apache logs
+* Testing configuration with `apachectl configtest`
+* Common misconfigurations (permissions, file paths, module issues)
+
+---
+
+
+## ✅ Apache Web Server – Comprehensive Study Checklist
+
+---
+
+### 1. **Apache Basics**
+
+* [ ] Understand what Apache is and how it fits into the LAMP stack
+* [ ] Know the difference between Apache and other web servers (e.g., Nginx)
+* [ ] Identify Apache package names (`httpd`, `apache2`) on different distros
+
+---
+
+### 2. **Installation & Service Management**
+
+* [ ] Install Apache on:
+
+  * [ ] Debian/Ubuntu (`sudo apt install apache2`)
+  * [ ] RHEL/CentOS/Fedora (`sudo dnf/yum install httpd`)
+* [ ] Start, stop, restart, and enable Apache with `systemctl`
+* [ ] Check Apache version and running status
+
+---
+
+### 3. **Apache Directory and Config Files**
+
+* [ ] Locate main config files (`httpd.conf`, `apache2.conf`)
+* [ ] Understand role of:
+
+  * [ ] `/etc/httpd/` (RHEL)
+  * [ ] `/etc/apache2/` (Debian)
+* [ ] Identify:
+
+  * [ ] `sites-available/`, `sites-enabled/`
+  * [ ] `mods-available/`, `mods-enabled/`
+* [ ] Locate and understand `access.log`, `error.log`
+
+---
+
+### 4. **Basic Web Server Setup**
+
+* [ ] Set `ServerName`, `DocumentRoot`, and `DirectoryIndex`
+* [ ] Serve a simple static HTML page
+* [ ] Customize error messages with `ErrorDocument`
+
+---
+
+### 5. **Virtual Host Configuration**
+
+* [ ] Create Name-based virtual hosts
+* [ ] Configure multiple websites on one server
+* [ ] Enable/disable sites with `a2ensite`, `a2dissite`
+* [ ] Test virtual host setup with `curl` or browser
+
+---
+
+### 6. **Apache Modules**
+
+* [ ] List loaded modules (`apachectl -M`)
+* [ ] Enable/disable modules (`a2enmod`, `a2dismod`)
+* [ ] Understand functions of key modules:
+
+  * [ ] `mod_ssl`
+  * [ ] `mod_rewrite`
+  * [ ] `mod_proxy`
+  * [ ] `mod_headers`
+  * [ ] `mod_security`
+
+---
+
+### 7. **Security Configuration**
+
+* [ ] Configure access control using `Require`, `Allow`, `Deny`
+* [ ] Use `.htaccess` for per-directory rules
+* [ ] Disable directory listing (`Options -Indexes`)
+* [ ] Hide Apache version info (`ServerSignature`, `ServerTokens`)
+* [ ] Implement basic authentication with `htpasswd`
+
+---
+
+### 8. **SSL/TLS (HTTPS)**
+
+* [ ] Install and enable `mod_ssl`
+* [ ] Create and use self-signed certificates
+* [ ] Use Let’s Encrypt with `certbot` for free SSL
+* [ ] Redirect HTTP to HTTPS
+
+---
+
+### 9. **Hosting Dynamic Content**
+
+* [ ] Install PHP and configure it with Apache (`libapache2-mod-php`)
+* [ ] Run dynamic content (e.g., PHP scripts)
+* [ ] Configure CGI or WSGI for other languages (Python, Perl)
+
+---
+
+### 10. **URL Rewriting and Redirection**
+
+* [ ] Enable `mod_rewrite`
+* [ ] Write basic rewrite rules in `.htaccess` or main config
+* [ ] Implement 301/302 redirects
+
+---
+
+### 11. **Performance Tuning**
+
+* [ ] Tune `KeepAlive`, `MaxRequestWorkers`, `Timeout`
+* [ ] Enable gzip compression with `mod_deflate`
+* [ ] Configure caching with `mod_expires`, `mod_cache`
+* [ ] Monitor with tools like `ab` (ApacheBench), `htop`, or `top`
+
+---
+
+### 12. **Monitoring and Logging**
+
+* [ ] Analyze `access.log` and `error.log`
+* [ ] Customize `LogFormat` and `CustomLog`
+* [ ] Monitor traffic with tools: `goaccess`, `webalizer`, `awstats`
+
+---
+
+### 13. **Backup and Restore**
+
+* [ ] Backup config files (`/etc/httpd/` or `/etc/apache2/`)
+* [ ] Use version control for config management
+* [ ] Test restoring Apache from a backup
+
+---
+
+### 14. **Troubleshooting**
+
+* [ ] Use `apachectl configtest` to validate config
+* [ ] Read error logs for troubleshooting clues
+* [ ] Diagnose:
+
+  * [ ] Failed service starts
+  * [ ] 403/404 errors
+  * [ ] Permission issues
+  * [ ] Port conflicts
+
+---
+
+### 15. **Hands-On Practice**
+
+* [ ] Set up a real-world virtual host configuration
+* [ ] Enable SSL and force HTTPS
+* [ ] Restrict access to certain directories
+* [ ] Deploy a simple PHP application
+* [ ] Use `.htaccess` to apply rewrite rules
+
+---
+
+**Apache Web Server – Hands-On Exercises**
+
+**Basic Setup & Configuration**
+
+1. Install Apache (`httpd` or `apache2`) on a Linux system
+2. Start, stop, restart, and enable Apache using `systemctl`
+3. Verify Apache is running using `curl` or a web browser
+4. Replace the default `index.html` with a custom webpage
+5. Set appropriate file permissions and ownership for web content
+
+**Virtual Hosts**
+
+6. Create name-based virtual hosts with separate `DocumentRoot` directories
+7. Configure custom domain names using the `/etc/hosts` file
+8. Enable and disable sites using `a2ensite` and `a2dissite` (Debian-based systems)
+9. Test multiple websites on a single server using `curl` or browser
+10. Set up IP-based virtual hosting (optional advanced task)
+
+**Security and Access Control**
+
+11. Create a `.htaccess` file and use it to restrict access to a directory
+12. Generate a `.htpasswd` file to implement basic HTTP authentication
+13. Disable directory listing by adjusting the `Options` directive
+14. Hide Apache version and OS signature in HTTP response headers
+15. Create and configure a self-signed SSL certificate
+16. Install and configure a free SSL certificate using Let’s Encrypt (`certbot`)
+
+**Rewriting and Redirection**
+
+17. Enable `mod_rewrite` and create `.htaccess` rules for URL rewriting
+18. Set up permanent (301) and temporary (302) redirects using `Redirect` and `RewriteRule`
+19. Test redirect behavior using `curl -I` or a browser
+
+**Performance Tuning and Optimization**
+
+20. Enable Gzip compression using `mod_deflate`
+21. Configure browser caching using `mod_expires` or `mod_headers`
+22. Tune Apache settings such as `KeepAlive`, `Timeout`, and `MaxRequestWorkers`
+23. Benchmark site performance using `ab` (Apache Benchmark)
+
+**Logging and Monitoring**
+
+24. Monitor `access.log` and `error.log` for real-time activity
+25. Customize log formats using `LogFormat` and `CustomLog` directives
+26. Install and use a log analysis tool such as `goaccess` or `awstats`
+
+**Dynamic Content and Scripting**
+
+27. Install PHP and integrate it with Apache (`libapache2-mod-php`)
+28. Deploy a basic PHP script (e.g., `phpinfo()`) to test functionality
+29. Install and host a PHP-based web application (e.g., WordPress)
+
+**Troubleshooting**
+
+30. Introduce a syntax error in the Apache config file and fix it using `apachectl configtest`
+31. Simulate a port conflict and resolve it by identifying the conflicting service
+32. Diagnose and fix a misconfigured virtual host (e.g., incorrect path or permissions)
+33. Use Apache logs to troubleshoot access and configuration issues
+
+---
+
+</details>
+
+<details>
+  <summary>Nginx</summary>
+  
+---
+
+**Nginx Web Server Administration – Topics in Linux Administration**
+
+1. Introduction to Nginx
+2. Comparison of Nginx vs Apache
+3. Installing Nginx on various Linux distributions
+4. Managing the Nginx service with systemctl
+5. Understanding the Nginx configuration structure
+6. Working with nginx.conf and include directives
+7. Setting up a basic static web server
+8. Configuring server_name and root directives
+9. Managing virtual hosts (server blocks)
+10. Serving multiple websites on a single server
+11. Using sites-available and sites-enabled (Debian-based systems)
+12. Serving custom error pages
+13. Understanding and configuring location blocks
+14. Using Nginx as a reverse proxy
+15. Proxying traffic to Apache, Node.js, Python (Flask/Django), or other backends
+16. Configuring load balancing with upstream blocks
+17. Load balancing algorithms: round-robin, least connections, IP hash
+18. Implementing basic access control by IP
+19. Setting up HTTP basic authentication using auth_basic
+20. Enabling HTTPS with a self-signed certificate
+21. Using Let's Encrypt with Certbot for free SSL certificates
+22. Redirecting HTTP to HTTPS
+23. Tuning SSL settings for security (TLS versions, ciphers)
+24. Enabling Gzip compression
+25. Configuring browser caching and static file expiration headers
+26. Optimizing worker_processes, worker_connections, and other performance settings
+27. Customizing access logs and error logs
+28. Creating and using custom log formats
+29. Real-time log monitoring with tail and grep
+30. Integrating Nginx logs with log analysis tools (e.g., goaccess)
+31. Handling FastCGI with PHP-FPM for dynamic content
+32. Running PHP applications like WordPress with Nginx
+33. Writing rewrite rules with rewrite and return directives
+34. Implementing permanent and temporary redirects (301 and 302)
+35. Removing or enforcing trailing slashes
+36. Redirecting non-www to www and vice versa
+37. Organizing configurations using modular includes
+38. Defining and using Nginx variables
+39. Using conditional logic inside configuration blocks
+40. Implementing connection limiting with limit_conn and limit_req
+41. Configuring request rate limiting and burst settings
+42. Setting security headers (CSP, X-Frame-Options, X-Content-Type-Options)
+43. Disabling unwanted HTTP methods
+44. Hiding Nginx version and server signature
+45. Detecting and mitigating DDoS attempts
+46. Setting up high availability with tools like keepalived (optional)
+47. Using DNS-based failover and backup servers
+48. Checking configuration syntax with nginx -t
+49. Reloading configuration without downtime
+50. Troubleshooting common issues (403, 404, 502, 504 errors)
+51. Analyzing error logs for debugging
+52. Automating SSL renewal with cron or systemd timers
+53. Maintaining configuration backups and version control
+54. Using Nginx in containerized environments (Docker)
+55. Creating reusable config templates for deployment
+
+---
+
+## Nginx Web Server Administration – Study Checklist
+
+---
+
+### 1. **Foundations of Nginx**
+
+* [ ] Understand what Nginx is and its core architecture
+* [ ] Know how Nginx differs from Apache (event-driven vs process-driven)
+* [ ] Identify common Nginx use cases (static server, reverse proxy, load balancer)
+
+---
+
+### 2. **Installation and Service Management**
+
+* [ ] Install Nginx using package managers (APT, YUM, DNF)
+* [ ] Start, stop, restart, and reload Nginx using `systemctl`
+* [ ] Enable Nginx to start on boot
+* [ ] Check service status and logs
+* [ ] Test Nginx configuration syntax with `nginx -t`
+
+---
+
+### 3. **Nginx Configuration Structure**
+
+* [ ] Understand the main config file (`/etc/nginx/nginx.conf`)
+* [ ] Learn the purpose of each main block: `events`, `http`, `server`, `location`
+* [ ] Use `include` statements to modularize configuration
+* [ ] Understand the difference between `sites-available/` and `sites-enabled/`
+
+---
+
+### 4. **Basic Web Server Setup**
+
+* [ ] Configure a server block to serve static files
+* [ ] Set `server_name`, `listen`, and `root` directives
+* [ ] Create custom error pages using `error_page`
+* [ ] Manage file permissions and ownership
+
+---
+
+### 5. **Virtual Hosting**
+
+* [ ] Set up name-based virtual hosts (multiple domains on one IP)
+* [ ] Configure domain resolution using `/etc/hosts` or DNS
+* [ ] Use symbolic links in `sites-enabled/` (Debian-based systems)
+* [ ] Test virtual host configurations with `curl` or a browser
+
+---
+
+### 6. **Reverse Proxy Setup**
+
+* [ ] Understand the concept of reverse proxying
+* [ ] Configure Nginx to proxy requests to backend servers (e.g., Apache, Node.js, Flask)
+* [ ] Set headers correctly with `proxy_set_header`
+* [ ] Handle WebSocket or long-lived connections
+
+---
+
+### 7. **Load Balancing**
+
+* [ ] Create an `upstream` block to define backend servers
+* [ ] Configure load balancing using round-robin, least connections, or IP hash
+* [ ] Test failover behavior by shutting down backends
+* [ ] Optionally explore third-party health check modules
+
+---
+
+### 8. **Security and Access Control**
+
+* [ ] Restrict access by IP using `allow` and `deny`
+* [ ] Set up basic authentication using `auth_basic` and `.htpasswd`
+* [ ] Disable directory listing using `autoindex off`
+* [ ] Hide Nginx version and server tokens
+* [ ] Disable unused HTTP methods (`DELETE`, `TRACE`, etc.)
+
+---
+
+### 9. **SSL/TLS Configuration**
+
+* [ ] Enable HTTPS using a self-signed certificate
+* [ ] Install and configure Let’s Encrypt SSL using `certbot`
+* [ ] Redirect HTTP traffic to HTTPS using `return` or `rewrite`
+* [ ] Configure SSL ciphers and TLS protocols securely
+* [ ] Implement HSTS (HTTP Strict Transport Security)
+
+---
+
+### 10. **Performance Optimization**
+
+* [ ] Enable Gzip compression with `gzip` directives
+* [ ] Set up browser caching with `expires` or `cache-control` headers
+* [ ] Tune `worker_processes`, `worker_connections`, and `keepalive_timeout`
+* [ ] Configure client buffer sizes
+* [ ] Optimize serving of static content
+
+---
+
+### 11. **Logging and Monitoring**
+
+* [ ] Understand and locate `access.log` and `error.log`
+* [ ] Customize log formats using `log_format`
+* [ ] Monitor logs in real-time using `tail -f`
+* [ ] Analyze logs with tools like `goaccess` or `awk`
+* [ ] Track request/response status codes
+
+---
+
+### 12. **Serving Dynamic Content**
+
+* [ ] Set up PHP processing via `fastcgi_pass` and PHP-FPM
+* [ ] Deploy a PHP-based application (e.g., WordPress)
+* [ ] Proxy to backend app servers (Node.js, Python, Ruby)
+* [ ] Manage cache headers and buffering behavior
+
+---
+
+### 13. **URL Rewriting and Redirection**
+
+* [ ] Create simple and complex rewrites using `rewrite`
+* [ ] Implement 301 and 302 redirects with `return` and `rewrite`
+* [ ] Force HTTPS or www/non-www redirects
+* [ ] Handle trailing slash redirects
+
+---
+
+### 14. **Modular and Advanced Configuration**
+
+* [ ] Use variables and conditional blocks (`if`, `map`)
+* [ ] Apply reusable configuration snippets with `include`
+* [ ] Use nested `location` blocks for fine-grained control
+* [ ] Organize complex deployments with multiple config files
+
+---
+
+### 15. **Rate Limiting and Connection Control**
+
+* [ ] Configure request rate limiting using `limit_req`
+* [ ] Set up concurrent connection limits with `limit_conn`
+* [ ] Use burst and delay options to smooth traffic spikes
+* [ ] Block bots or scrapers based on user agent or request patterns
+
+---
+
+### 16. **Security Hardening**
+
+* [ ] Implement common security headers (CSP, X-Frame-Options, X-Content-Type-Options)
+* [ ] Prevent host header injection and open redirect vulnerabilities
+* [ ] Protect against slowloris and HTTP flood attacks
+* [ ] Implement DDoS mitigation basics
+
+---
+
+### 17. **Troubleshooting and Maintenance**
+
+* [ ] Check configuration syntax (`nginx -t`)
+* [ ] Reload and restart Nginx without downtime
+* [ ] Debug common issues (403, 404, 502, 504 errors)
+* [ ] Analyze `error.log` to trace backend or config issues
+* [ ] Use `curl -I` or `curl -v` for response inspection
+
+---
+
+### 18. **Automation and Best Practices**
+
+* [ ] Automate SSL renewal with cron or systemd timers
+* [ ] Use version control (e.g., Git) for Nginx configurations
+* [ ] Backup and restore Nginx configs
+* [ ] Use containers (Docker) for isolated Nginx environments (optional)
+* [ ] Maintain staging vs production environments
+
+---
+
+## **Nginx Web Server Hands-On Exercises**
+
+1. Install Nginx on a Linux system using the package manager.
+2. Start, stop, restart, and reload the Nginx service using systemctl.
+3. Verify Nginx is running by accessing the default web page via browser or curl.
+4. Locate and examine the main configuration file `/etc/nginx/nginx.conf`.
+5. Test the Nginx configuration syntax using `nginx -t`.
+6. Create a simple static website by replacing the default index page.
+7. Set appropriate permissions for the web root directory and files.
+8. Configure a basic server block (virtual host) for a custom domain or IP.
+9. Configure multiple server blocks to host multiple websites on one server.
+10. Edit the `/etc/hosts` file to map test domain names to localhost for testing.
+11. Create custom error pages (e.g., 404, 500) and configure them in server blocks.
+12. Configure a reverse proxy to forward requests to a backend server (Apache, Node.js, etc.).
+13. Set up load balancing across multiple backend servers using upstream blocks.
+14. Implement HTTP basic authentication to restrict access to a directory.
+15. Disable directory listing in the server configuration.
+16. Hide Nginx version information from HTTP response headers.
+17. Create and apply a self-signed SSL certificate to enable HTTPS.
+18. Install and configure Let’s Encrypt SSL certificates using Certbot.
+19. Configure HTTP to HTTPS redirection.
+20. Enable gzip compression for served content.
+21. Set browser caching headers for static files.
+22. Customize access and error log formats and locations.
+23. Monitor access and error logs in real-time using `tail -f`.
+24. Configure Nginx to serve PHP applications via PHP-FPM.
+25. Write rewrite rules for URL redirection and modification.
+26. Test permanent and temporary redirects using curl or browser.
+27. Limit client request rates using `limit_req` directives.
+28. Limit number of simultaneous connections using `limit_conn`.
+29. Use conditional statements and variables in configuration files.
+30. Reload Nginx configuration without downtime.
+31. Introduce a syntax error in configuration and fix it after troubleshooting with `nginx -t`.
+32. Troubleshoot common HTTP errors (403 Forbidden, 404 Not Found, 502 Bad Gateway, 504 Gateway Timeout).
+33. Automate SSL certificate renewal with cron or systemd timers.
+34. Backup and restore Nginx configuration files.
+35. Deploy Nginx inside a Docker container for isolated testing environments.
+
+---
+
+</details>
 
 <details>
   <summary>****</summary>
