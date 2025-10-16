@@ -2316,7 +2316,7 @@
 
 ---
 
-##  **15. Projects to Practice
+###  **15. Projects to Practice
 
 * [ ] Create a resource dashboard using Prometheus + Grafana
 * [ ] Simulate load and optimize performance using tuning parameters
@@ -2327,7 +2327,246 @@
 ---
 </details>
 
+<details>
+  <summary>Text Processing</summary>
 
+---
+
+### 1. File Viewing and Navigation
+
+* `cat`, `tac` – Display contents of files (forward/reverse)
+* `more`, `less` – Paginated viewing
+* `head`, `tail` – Display the beginning or end of files
+* `nl` – Number lines in a file
+
+### 2. Searching and Filtering
+
+* `grep`, `egrep`, `fgrep` – Pattern matching with regular expressions
+* Recursive searches and context options (`-r`, `-A`, `-B`, `-C`)
+* Combining `find` with `grep` for targeted searches
+
+### 3. Cutting, Splitting, and Joining
+
+* `cut` – Extract specific fields or columns
+* `awk` – Pattern scanning and field-based processing
+* `sed` – Stream editing (substitute, delete, insert, append)
+* `tr` – Translate or delete characters
+* `split`, `csplit` – Split files by size or pattern
+* `paste` – Merge lines side by side
+* `join` – Join files on a common field
+
+### 4. Sorting and Uniqueness
+
+* `sort` – Sort lines in files
+* `uniq` – Remove or count duplicate lines
+* `comm` – Compare two sorted files line by line
+* `diff`, `sdiff` – Display differences between files
+
+### 5. Counting and Statistics
+
+* `wc` – Count lines, words, characters, bytes
+* Using `awk` for aggregation and statistical summaries
+* Frequency counts using `cut`, `sort`, and `uniq -c`
+
+### 6. Text Substitution and Transformation
+
+* `sed` – Pattern substitution and text transformations
+* `awk` – Field editing and record reformatting
+* `tr` – Character-level transformations (e.g. case conversion)
+
+### 7. Formatting and Alignment
+
+* `fmt` – Reformat text with line wrapping
+* `pr` – Format text for printing (headers, pagination)
+* `column` – Align tabular data in columns
+* `expand`, `unexpand` – Convert tabs to spaces and vice versa
+* `fold` – Wrap long lines to a specific width
+* `nl` – Line numbering with formatting options
+
+### 8. Regular Expressions
+
+* Basic and extended regular expressions
+* Used with `grep`, `sed`, `awk`, `perl`, `find`, etc.
+* Anchors, quantifiers, character classes, groups
+
+### 9. Text Archival and Compression Tools (Optional for Text Pipelines)
+
+* `gzip`, `gunzip`, `zcat`
+* `bzip2`, `xz`, `zip`, `tar`
+* Searching within compressed files using `zgrep`, `zcat`, etc.
+
+### 10. Pipelining and Tool Chaining
+
+* Combining tools with pipes (`|`)
+* Building processing chains like:
+  `cat file | grep error | awk '{print $5}' | sort | uniq -c`
+
+### 11. Advanced and Structured Data Tools
+
+* `jq` – JSON parsing and formatting
+* `yq` – YAML processing
+* `xmlstarlet` – XML parsing and transformation
+* `perl` – Advanced text and regex processing
+* `python` (with `re`, `csv`, `json`, `pandas`) for complex tasks
+
+### 12. Common Use Cases in System Administration
+
+* Parsing and analyzing log files
+* Extracting values from configuration files
+* Bulk editing or formatting of text files
+* Automating reports and summaries from text data
+* Processing CSV/TSV or other delimited files
+
+---
+
+## ✅ Text Processing in Linux Administration – Study Checklist
+
+---
+
+### 1. **File Viewing and Navigation**
+
+* [ ] Learn to use `cat` and `tac` to view files
+* [ ] View files page-by-page using `more` and `less`
+* [ ] Display the first and last N lines of files with `head` and `tail`
+* [ ] Use `nl` to number lines of a file
+
+---
+
+### 2. **Text Searching and Filtering**
+
+* [ ] Use `grep` for basic string matching
+* [ ] Use `egrep`/`grep -E` for extended regular expressions
+* [ ] Filter by inverted match, count occurrences, and show line numbers
+* [ ] Use context options: `-A`, `-B`, `-C`
+* [ ] Search recursively in directories with `grep -r`
+* [ ] Combine `find` and `grep` for targeted search
+
+---
+
+### 3. **Text Cutting, Splitting, and Joining**
+
+* [ ] Use `cut` to extract specific columns or fields
+* [ ] Use `awk` to parse fields, filter rows, and generate formatted output
+* [ ] Learn basic `awk` syntax: `BEGIN`, `END`, field access `$1`, `$2`, etc.
+* [ ] Use `sed` for search and replace in streams/files
+* [ ] Use `tr` to translate or delete characters
+* [ ] Use `split` and `csplit` to divide files by size or pattern
+* [ ] Combine lines using `paste`
+* [ ] Join lines from two files using `join` based on common fields
+
+---
+
+### 4. **Sorting and Removing Duplicates**
+
+* [ ] Sort files alphabetically and numerically using `sort`
+* [ ] Sort by specific fields using `sort -k`
+* [ ] Sort in reverse or stable order
+* [ ] Remove duplicates using `uniq`
+* [ ] Count duplicates using `uniq -c`
+* [ ] Compare files line-by-line with `comm`, `diff`, and `sdiff`
+
+---
+
+### 5. **Text Counting and Statistics**
+
+* [ ] Count lines, words, characters, and bytes with `wc`
+* [ ] Use `awk` for calculating sums, averages, and other statistics
+* [ ] Combine `cut`, `sort`, and `uniq -c` for frequency analysis
+
+---
+
+### 6. **Text Substitution and Transformation**
+
+* [ ] Use `sed` to:
+
+  * Substitute text (`s/old/new/`)
+  * Delete or insert lines
+  * Work with in-place editing (`-i`)
+* [ ] Use `awk` to:
+
+  * Replace and reformat fields
+  * Perform conditional substitutions
+* [ ] Use `tr` to:
+
+  * Change case
+  * Delete whitespace or specific characters
+
+---
+
+### 7. **Text Formatting and Alignment**
+
+* [ ] Format long lines with `fmt`
+* [ ] Format for printing with `pr` (headers, columns)
+* [ ] Format tabular data using `column`
+* [ ] Convert tabs to spaces using `expand`
+* [ ] Convert spaces to tabs using `unexpand`
+* [ ] Wrap long lines using `fold`
+* [ ] Add or customize line numbers with `nl`
+
+---
+
+### 8. **Regular Expressions (Regex)**
+
+* [ ] Understand basic regex syntax:
+
+  * `^`, `$`, `.`, `*`, `+`, `?`, `[]`, `()`
+* [ ] Learn extended regex (`grep -E`)
+* [ ] Practice grouping and alternation (`(a|b)`, `a{2,3}`)
+* [ ] Apply regex with `grep`, `sed`, `awk`, `perl`
+* [ ] Test expressions with sample text files
+
+---
+
+### 9. **Working with Compressed Text Files**
+
+* [ ] Use `gzip`, `bzip2`, `xz`, and `zip` for compression
+* [ ] Use `zcat`, `zless`, `zgrep` for working with compressed logs
+* [ ] Use `tar` with compression options (`-czf`, `-xzf`, etc.)
+
+---
+
+### 10. **Combining Tools in Pipelines**
+
+* [ ] Practice using pipes (`|`) to combine commands
+* [ ] Build common processing pipelines:
+
+  * `cat file | grep pattern | awk '{print $2}' | sort | uniq -c`
+* [ ] Redirect input/output using `<`, `>`, `>>`, `2>`, `&>`, etc.
+
+---
+
+### 11. **Advanced Structured Data Processing**
+
+* [ ] Parse and format JSON using `jq`
+* [ ] Parse YAML files using `yq`
+* [ ] Process XML using `xmlstarlet`
+* [ ] Use `perl` for advanced text and regex operations
+* [ ] Write simple `python` scripts with `re`, `csv`, or `json` modules
+
+---
+
+### 12. **System Administration Use Cases**
+
+* [ ] Extract information from system log files (`/var/log/`)
+* [ ] Parse Apache/Nginx logs or system audit logs
+* [ ] Edit or validate configuration files in bulk
+* [ ] Generate simple text reports (e.g., top IP addresses from logs)
+* [ ] Process CSV/TSV data for reporting or alerts
+* [ ] Monitor real-time log data with `tail -f | grep`
+
+---
+
+### 13. **Project for Practice**
+
+* [ ] Build a log parser that extracts IPs and counts them
+* [ ] Create a script that summarizes disk usage per directory
+* [ ] Develop a tool that watches a log file for errors in real time
+* [ ] Write a report generator using `awk` for a CSV export
+* [ ] Automate text substitution across multiple config files
+
+---
+
+</details>
 
 
 
