@@ -348,6 +348,8 @@
 
 ## ✅ **Linux Package Management – Study Checklist**
 
+---
+
 ### 🔸 1. Fundamentals of Package Management
 
 * [ ] Understand what packages are (binary vs source)
@@ -478,7 +480,7 @@
 
 ---
 
-### 🔸 Bonus: Practice Exercises
+### 🔸 10. Practice Exercises
 
 * [ ] Install and remove 3 different packages using APT and DNF
 * [ ] Create a list of all installed packages and save it to a file
@@ -2019,6 +2021,315 @@
 * [ ] Use `find / -perm -4000` to detect SUID binaries (common exam topic)
 
 </details>
+
+<details>
+  <summary>System Monitoring and Performance Tuning</summary>
+
+---
+
+### **1. System Monitoring Basics**
+
+* Understanding system performance metrics (CPU, memory, disk, network)
+* Real-time vs historical monitoring
+* Logging vs monitoring
+
+---
+
+### **2. CPU Monitoring**
+
+* Load average interpretation (`uptime`, `top`, `w`)
+* CPU usage (`top`, `htop`, `mpstat`, `vmstat`, `sar`)
+* Identifying CPU bottlenecks
+
+---
+
+### **3. Memory Monitoring**
+
+* RAM and swap usage (`free`, `vmstat`, `top`, `smem`, `sar`)
+* Page faults and memory leaks
+* Buffer vs cache memory
+* OOM (Out of Memory) killer analysis
+
+---
+
+### **4. Disk and I/O Monitoring**
+
+* Disk usage (`df`, `du`)
+* I/O performance (`iostat`, `iotop`, `dstat`, `blktrace`)
+* Filesystem performance and tuning (`tune2fs`, journaling options)
+* Disk latency and throughput analysis
+
+---
+
+### **5. Network Monitoring**
+
+* Bandwidth usage (`iftop`, `nload`, `ip -s link`)
+* Network connections (`netstat`, `ss`, `lsof`)
+* Packet analysis and sniffing (`tcpdump`, `wireshark`)
+* Latency and packet loss (`ping`, `mtr`, `traceroute`)
+* Network congestion and tuning (TCP window size, buffers)
+
+---
+
+### **6. Process Monitoring and Management**
+
+* Process resource usage (`ps`, `top`, `htop`, `nice`, `renice`)
+* Zombie and orphan processes
+* Service monitoring (`systemctl`, `service`)
+* Cgroups for resource control
+
+---
+
+### **7. Logs and Event Monitoring**
+
+* System logs (`/var/log/`, `journalctl`, `rsyslog`, `syslog-ng`)
+* Log rotation and management (`logrotate`)
+* Kernel logs and dmesg
+* Audit logs (`auditd`, `ausearch`)
+
+---
+
+### **8. System Tuning Tools and Techniques**
+
+* `sysctl` and `/etc/sysctl.conf` tuning
+* Kernel parameters (e.g., for networking, memory management)
+* `ulimit` and resource limits
+* Tuning swappiness and cache pressure
+
+---
+
+### **9. Benchmarking Tools**
+
+* `stress`, `stress-ng` for load testing
+* `sysbench` for CPU, memory, I/O, MySQL
+* `fio` for file I/O benchmarking
+* `phoronix-test-suite`
+
+---
+
+### **10. Performance Profiling and Tracing**
+
+* `perf` (Linux performance counters)
+* `strace` (system call tracing)
+* `ltrace` (library call tracing)
+* `ftrace`, `bpftrace`, `eBPF`, `SystemTap`
+* Flame graphs for visual profiling
+
+---
+
+### **11. System Resource Scheduling and Optimization**
+
+* Nice values and CPU affinity
+* I/O schedulers (CFQ, deadline, noop, BFQ)
+* Tuning priority of services (cgroups, systemd slices)
+
+---
+
+### **12. Monitoring and Alerting Tools**
+
+* **Command-line tools**: `top`, `htop`, `iotop`, `dstat`, `atop`
+* **System monitoring suites**:
+
+  * **Nagios**, **Zabbix**, **Icinga**
+  * **Prometheus** + **Grafana**
+  * **Netdata**
+  * **Glances**
+* **Logging and observability stacks**: ELK Stack (Elasticsearch, Logstash, Kibana), Graylog
+
+---
+
+### **13. Virtualization and Container Performance**
+
+* Monitoring virtual machines (KVM, QEMU, libvirt tools)
+* Container resource usage (`docker stats`, `cgroup` analysis)
+* Kubernetes monitoring (Prometheus, cAdvisor, kube-state-metrics)
+
+---
+
+### **14. Automation and Scripting**
+
+* Automating monitoring scripts (Bash, Python)
+* Scheduled monitoring and alerts (cron jobs)
+* Integration with alert systems (email, Slack, PagerDuty)
+
+---
+
+### **15. Security and Audit Performance**
+
+* Audit system performance impacts
+* Monitoring unauthorized access or system misuse
+* Fail2ban, auditd performance considerations
+
+---
+
+## ✅ **Linux System Monitoring & Performance Tuning – Study Checklist**
+
+---
+
+###  **1. Fundamentals of System Monitoring**
+
+* [ ] Understand what system monitoring entails
+* [ ] Learn the difference between real-time and historical monitoring
+* [ ] Familiarize yourself with key system resources (CPU, memory, disk, network)
+* [ ] Learn the Linux system boot process (relevant for root cause analysis)
+
+---
+
+###  **2. CPU Monitoring**
+
+* [ ] Understand load average (`uptime`, `top`, `w`)
+* [ ] Monitor CPU usage with `top`, `htop`
+* [ ] Use `mpstat`, `vmstat`, `sar` for deeper insights
+* [ ] Identify CPU bottlenecks and high CPU-consuming processes
+* [ ] Learn how to adjust process priority (`nice`, `renice`, `taskset`)
+
+---
+
+###  **3. Memory Monitoring**
+
+* [ ] Check memory and swap usage (`free`, `vmstat`, `top`, `htop`)
+* [ ] Understand buffer/cache memory
+* [ ] Monitor swap behavior and usage patterns
+* [ ] Analyze memory leaks using `smem`, `ps`, `valgrind`
+* [ ] Understand and analyze the OOM Killer logs (`dmesg`, `/var/log/messages`)
+
+---
+
+###  **4. Disk & I/O Monitoring**
+
+* [ ] Check disk usage (`df`, `du`)
+* [ ] Monitor I/O with `iostat`, `iotop`, `dstat`, `blktrace`
+* [ ] Understand disk latency and throughput
+* [ ] Analyze filesystem performance (ext4, xfs tuning options)
+* [ ] Learn about I/O schedulers (`noop`, `deadline`, `cfq`, `bfq`)
+* [ ] Use `tune2fs` and `mount` options for filesystem tuning
+
+---
+
+###  **5. Network Monitoring**
+
+* [ ] Monitor bandwidth usage (`iftop`, `nload`, `vnstat`)
+* [ ] List open ports and connections (`netstat`, `ss`, `lsof`)
+* [ ] Analyze traffic using `tcpdump`, `wireshark`
+* [ ] Check network latency and packet loss (`ping`, `mtr`, `traceroute`)
+* [ ] Tune network stack with `sysctl` parameters (e.g., TCP buffer sizes)
+
+---
+
+###  **6. Process Monitoring & Management**
+
+* [ ] Monitor processes with `ps`, `top`, `htop`
+* [ ] Identify zombie and orphan processes
+* [ ] Manage background jobs and services (`systemctl`, `service`, `jobs`)
+* [ ] Use `cgroups` to limit CPU and memory usage
+* [ ] Create and apply custom service unit files in `systemd`
+
+---
+
+###  **7. Logging and Audit Monitoring**
+
+* [ ] View and filter system logs (`journalctl`, `/var/log/`)
+* [ ] Configure `rsyslog`, `syslog-ng`, or `journald`
+* [ ] Set up log rotation with `logrotate`
+* [ ] Enable and analyze logs with `auditd`, `ausearch`, `aureport`
+* [ ] Track kernel messages using `dmesg`
+
+---
+
+###  **8. Kernel and System Tuning**
+
+* [ ] Learn how to read and change kernel parameters with `sysctl`
+* [ ] Configure `/etc/sysctl.conf`
+* [ ] Understand and tune `vm.swappiness`, `dirty_ratio`, `cache_pressure`
+* [ ] Set process resource limits with `ulimit` and `/etc/security/limits.conf`
+* [ ] Explore CPU affinity and real-time tuning (`taskset`, `chrt`)
+
+---
+
+###  **9. Benchmarking Tools**
+
+* [ ] Use `stress`, `stress-ng` for CPU and memory stress tests
+* [ ] Benchmark disk I/O with `fio`
+* [ ] Use `sysbench` for CPU, memory, file I/O, and MySQL
+* [ ] Try `phoronix-test-suite` for comprehensive benchmarking
+* [ ] Compare pre- and post-tuning performance
+
+---
+
+###  **10. Profiling & Tracing Tools**
+
+* [ ] Monitor system calls with `strace`, `ltrace`
+* [ ] Use `perf` for CPU profiling
+* [ ] Learn basics of `ftrace`, `bpftrace`, and `SystemTap`
+* [ ] Visualize performance with flame graphs
+* [ ] Trace long-running system issues with eBPF tools
+
+---
+
+###  **11. Monitoring and Alerting Tools**
+
+#### Command-line tools:
+
+* [ ] `top`, `htop`, `iotop`, `nmon`, `atop`, `glances`
+
+#### Monitoring stacks:
+
+* [ ] Install and configure **Prometheus**
+* [ ] Set up **Grafana** dashboards
+* [ ] Use **node_exporter** or **collectd**
+* [ ] Try **Netdata** for real-time monitoring
+* [ ] Compare **Nagios**, **Zabbix**, **Icinga**
+
+#### Alerting:
+
+* [ ] Set up alert rules in Prometheus or Zabbix
+* [ ] Send alerts via email, Slack, PagerDuty, etc.
+
+---
+
+###  **12. Virtualization and Containers**
+
+* [ ] Monitor VMs with `virt-top`, `virsh`, `libvirt`
+* [ ] Use `docker stats` for container performance
+* [ ] Apply cgroups limits to Docker containers
+* [ ] Set up Prometheus + cAdvisor for container metrics
+* [ ] Monitor Kubernetes with `kube-state-metrics`, `metrics-server`
+
+---
+
+###  **13. Automation and Scripting**
+
+* [ ] Write Bash scripts to automate monitoring tasks
+* [ ] Schedule monitoring scripts with `cron`
+* [ ] Parse logs and metrics with `awk`, `sed`, `grep`
+* [ ] Integrate scripts with alerting systems (mail, webhook, Slack)
+
+---
+
+###  **14. Security and Audit Performance**
+
+* [ ] Analyze audit logs without degrading performance
+* [ ] Monitor failed login attempts (`faillog`, `lastb`)
+* [ ] Use `fail2ban` to block brute-force attacks
+* [ ] Check for rootkits with `chkrootkit`, `rkhunter`
+* [ ] Understand how security tools impact system performance
+
+---
+
+##  **15. Projects to Practice
+
+* [ ] Create a resource dashboard using Prometheus + Grafana
+* [ ] Simulate load and optimize performance using tuning parameters
+* [ ] Build a container monitoring solution with Docker + cAdvisor
+* [ ] Write a script to alert when CPU or memory usage exceeds a threshold
+* [ ] Analyze a performance issue from a real or simulated Linux server
+
+---
+</details>
+
+
+
+
 
 
 <details>
