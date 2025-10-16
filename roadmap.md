@@ -5216,7 +5216,7 @@
   
 ---
 
-**Nginx Web Server Administration – Topics in Linux Administration**
+**Nginx Web Server Administration**
 
 1. Introduction to Nginx
 2. Comparison of Nginx vs Apache
@@ -5485,6 +5485,831 @@
 33. Automate SSL certificate renewal with cron or systemd timers.
 34. Backup and restore Nginx configuration files.
 35. Deploy Nginx inside a Docker container for isolated testing environments.
+
+---
+
+</details>
+
+<details>
+  <summary>DNS</summary>
+
+---
+
+**DNS Management Topics in Linux Administration**
+
+1. Introduction to DNS and its role in networking
+2. Understanding DNS record types (A, AAAA, CNAME, MX, NS, PTR, TXT, SRV)
+3. Installing and configuring DNS servers (BIND, dnsmasq, Unbound)
+4. DNS server architecture and components (zones, zone files, resolvers)
+5. Forward and reverse DNS lookups
+6. Creating and managing DNS zones (primary/master and secondary/slave zones)
+7. Configuring zone files: syntax and structure
+8. Managing DNS records in zone files
+9. Setting up and configuring caching DNS servers
+10. Configuring DNS forwarding and recursion
+11. Understanding and configuring TTL (Time To Live) values
+12. Configuring and managing DNSSEC (DNS Security Extensions)
+13. Using tools for DNS diagnostics and troubleshooting (dig, nslookup, host)
+14. Configuring and securing BIND server (access control lists, logging, chroot)
+15. Implementing dynamic DNS updates (DDNS)
+16. Configuring split-horizon (views) DNS
+17. Managing DNS zones with DNS management software or web interfaces
+18. Integrating DNS with DHCP for dynamic IP address assignment
+19. Monitoring and logging DNS server activity
+20. Troubleshooting common DNS issues (e.g., resolution failures, propagation delays)
+
+---
+
+## DNS Management – Comprehensive Study Checklist
+
+---
+
+### 1. **Fundamentals of DNS**
+
+* [ ] Understand the purpose and function of DNS in networking
+* [ ] Learn about DNS hierarchy and the domain name space
+* [ ] Differentiate between DNS record types: A, AAAA, CNAME, MX, NS, PTR, TXT, SRV
+
+---
+
+### 2. **DNS Server Software**
+
+* [ ] Install and configure BIND DNS server
+* [ ] Understand alternatives: dnsmasq, Unbound, PowerDNS
+* [ ] Know the components of DNS server architecture (zones, resolvers, caching)
+
+---
+
+### 3. **DNS Zones and Zone Files**
+
+* [ ] Create and manage forward DNS zones (primary/master and secondary/slave)
+* [ ] Create and manage reverse DNS zones for PTR records
+* [ ] Understand and edit zone file syntax and structure
+* [ ] Add and update DNS resource records in zone files
+* [ ] Increment and manage the zone serial number correctly for updates
+
+---
+
+### 4. **DNS Server Configuration**
+
+* [ ] Configure named.conf (BIND) with proper zone declarations
+* [ ] Implement access control lists (ACLs) for security
+* [ ] Enable logging for DNS queries and errors
+* [ ] Configure chroot jail for BIND server security (optional advanced)
+
+---
+
+### 5. **DNS Query Types and Resolution**
+
+* [ ] Understand recursive vs iterative queries
+* [ ] Configure DNS recursion and forwarding
+* [ ] Set up caching DNS servers to improve performance
+
+---
+
+### 6. **DNS Security**
+
+* [ ] Implement DNSSEC for zone signing and validation
+* [ ] Manage DNSSEC keys and signatures
+* [ ] Understand and configure TSIG keys for secure zone transfers
+* [ ] Secure zone transfers between primary and secondary servers
+
+---
+
+### 7. **Dynamic DNS (DDNS)**
+
+* [ ] Configure Dynamic DNS updates using `nsupdate` or DHCP integration
+* [ ] Manage permissions for dynamic updates
+* [ ] Integrate DHCP with DNS for automatic updates of DNS records
+
+---
+
+### 8. **Advanced DNS Configurations**
+
+* [ ] Configure split-horizon (views) DNS for internal/external clients
+* [ ] Manage multiple views in named.conf for different network zones
+* [ ] Use forwarders and stub zones for complex DNS setups
+
+---
+
+### 9. **DNS Troubleshooting and Diagnostics**
+
+* [ ] Use `dig` to query specific DNS records and diagnose issues
+* [ ] Use `nslookup` and `host` for DNS lookups
+* [ ] Check zone file syntax with `named-checkzone`
+* [ ] Verify BIND configuration syntax with `named-checkconf`
+* [ ] Troubleshoot common DNS issues: resolution failures, propagation delays, stale records
+
+---
+
+### 10. **Monitoring and Maintenance**
+
+* [ ] Monitor DNS server logs for abnormal activities
+* [ ] Plan and perform regular DNS zone backups
+* [ ] Automate DNS server and zone file maintenance tasks
+* [ ] Keep DNS server software up to date for security and performance
+
+---
+
+### 11. **Practical Skills**
+
+* [ ] Configure a fully functional authoritative DNS server (primary and secondary)
+* [ ] Set up a caching and forwarding DNS server for internal use
+* [ ] Perform zone transfers securely between DNS servers
+* [ ] Implement DNSSEC and test validation
+* [ ] Set up dynamic DNS with DHCP integration
+* [ ] Troubleshoot DNS resolution issues using diagnostic tools
+
+---
+
+**Hands-on Exercises in DNS Management**
+
+1. Install BIND DNS server on a Linux machine.
+2. Start, stop, and enable the BIND service to run on boot.
+3. Configure a basic forward DNS zone for a sample domain (e.g., example.com).
+4. Create and edit the zone file with A, CNAME, and MX records.
+5. Configure and verify reverse DNS zone for the corresponding IP range.
+6. Test DNS resolution using tools like `dig`, `nslookup`, and `host`.
+7. Configure and enable DNS recursion and forwarding to an external DNS server.
+8. Set up a secondary (slave) DNS server and configure zone transfers securely.
+9. Implement access control lists (ACLs) to restrict DNS queries and zone transfers.
+10. Configure logging of DNS queries and errors, and analyze the logs.
+11. Set up DNSSEC on a zone: generate keys, sign the zone, and verify signatures.
+12. Configure Dynamic DNS (DDNS) updates for the zone and update records dynamically.
+13. Integrate DHCP with BIND to automatically update DNS records upon lease assignments.
+14. Configure split-horizon DNS (views) to serve different DNS responses to internal and external clients.
+15. Use `named-checkconf` and `named-checkzone` to validate DNS configuration and zone files.
+16. Simulate common DNS issues and troubleshoot them using diagnostic tools.
+17. Backup and restore DNS zone files and configuration files.
+18. Configure caching DNS server using BIND or dnsmasq for internal network use.
+19. Implement and test TSIG keys for securing zone transfers between master and slave servers.
+20. Use tools like `tcpdump` or `wireshark` to monitor DNS traffic for troubleshooting.
+
+---
+
+</details>
+
+
+<details>
+  <summary>DHCP</summary>
+
+---
+
+### **DHCP Management Topics**
+
+1. **Introduction to DHCP**
+
+   * Role of DHCP in network management
+   * Static vs dynamic IP addressing
+   * DHCP lease process (DORA: Discover, Offer, Request, Acknowledgement)
+
+2. **DHCP Protocol Basics**
+
+   * DHCP message types
+   * Lease time, renewal, and rebinding
+   * DHCP options (e.g., DNS server, default gateway, domain name)
+   * DHCP relay agent concept
+
+3. **Installing DHCP Server**
+
+   * Installing `isc-dhcp-server` (Debian/Ubuntu)
+   * Installing `dhcpd` on RHEL/CentOS/Fedora
+   * Verifying installation and required directories
+
+4. **DHCP Server Configuration**
+
+   * Editing the main configuration file (`/etc/dhcp/dhcpd.conf`)
+   * Defining subnet declarations and IP address ranges
+   * Setting lease times (default and max lease)
+   * Configuring options: router, DNS, NTP, domain-name
+
+5. **Static IP Assignment (DHCP Reservation)**
+
+   * Assigning fixed IPs to clients using MAC addresses
+   * Testing reservations with multiple devices
+
+6. **DHCP Lease Management**
+
+   * Viewing active leases (`/var/lib/dhcp/dhcpd.leases`)
+   * Releasing and renewing IP leases on clients
+   * Clearing or expiring leases manually
+
+7. **Running and Managing DHCP Server**
+
+   * Starting, stopping, and enabling the DHCP service
+   * Configuring DHCP to start at boot
+   * Checking service status and logs
+
+8. **Logging and Monitoring**
+
+   * Location and interpretation of DHCP logs
+   * Monitoring DHCP server activity and failures
+   * Troubleshooting client IP assignment issues
+
+9. **DHCP Relay Agent Configuration**
+
+   * Configuring `dhcrelay` on a router or intermediate host
+   * Understanding how DHCP relay works across networks
+
+10. **Security in DHCP**
+
+    * Limiting DHCP access to specific MAC or IP ranges
+    * Isolating DHCP traffic using VLANs or firewalls
+    * Preventing rogue DHCP servers (DHCP snooping concepts)
+
+11. **DHCP Client Configuration**
+
+    * Using `dhclient` to request or release an IP address
+    * Manually configuring DHCP on a Linux client
+    * Checking client lease files and interface settings
+
+12. **Advanced DHCP Topics**
+
+    * Multiple subnet declarations
+    * Failover and load balancing between two DHCP servers
+    * Integrating DHCP with DNS (Dynamic DNS updates)
+    * IPv6 DHCP (DHCPv6) overview and configuration basics
+
+13. **Alternative DHCP Servers**
+
+    * Overview of `dnsmasq` for lightweight DHCP/DNS
+    * Using `systemd-networkd`'s built-in DHCP server (minimal setups)
+    * Comparison of ISC DHCP vs Kea DHCP (next-gen ISC server)
+
+14. **Backup and Recovery**
+
+    * Backing up DHCP configuration and lease files
+    * Restoring DHCP settings on a new or reinstalled server
+
+---
+
+## DHCP Management in Linux – Comprehensive Study Checklist
+
+---
+
+### 1. **Fundamentals of DHCP**
+
+* [ ] Understand the purpose and function of DHCP
+* [ ] Learn the DHCP lease acquisition process (DORA: Discover, Offer, Request, Acknowledge)
+* [ ] Identify key DHCP terms: scopes, leases, reservations, options
+* [ ] Distinguish between dynamic, automatic, and static (manual) IP assignment
+
+---
+
+### 2. **DHCP Protocol and Options**
+
+* [ ] Understand DHCP message types (Discover, Offer, etc.)
+* [ ] Learn about DHCP lease durations and renewal times
+* [ ] Study common DHCP options (routers, DNS servers, domain-name, NTP servers)
+* [ ] Explore advanced options and custom option definitions
+
+---
+
+### 3. **Installing and Enabling DHCP Server**
+
+* [ ] Install ISC DHCP server (`isc-dhcp-server` or `dhcpd`)
+* [ ] Create and verify configuration directories and files
+* [ ] Enable and start the DHCP service with `systemctl`
+* [ ] Configure the correct network interface for DHCP to listen on
+
+---
+
+### 4. **Basic DHCP Server Configuration**
+
+* [ ] Edit `/etc/dhcp/dhcpd.conf` for global settings
+* [ ] Define subnet and IP range declarations
+* [ ] Set default and maximum lease times
+* [ ] Configure basic DHCP options (gateway, DNS, domain name)
+
+---
+
+### 5. **DHCP Reservation (Static IP Assignment)**
+
+* [ ] Assign a static IP to a client using its MAC address
+* [ ] Test the reservation from the client side
+* [ ] Use different reservation formats based on OS or DHCP implementation
+
+---
+
+### 6. **Managing DHCP Leases**
+
+* [ ] Understand lease file location (`/var/lib/dhcp/dhcpd.leases`)
+* [ ] View and interpret active lease entries
+* [ ] Manually release and renew IP leases from clients
+* [ ] Clear or expire leases on the server
+
+---
+
+### 7. **Client-Side DHCP Configuration**
+
+* [ ] Use `dhclient` to request or renew IP address
+* [ ] Check IP configuration using `ip a` or `ifconfig`
+* [ ] View lease details on the client
+* [ ] Manually configure or disable DHCP on Linux clients
+
+---
+
+### 8. **Logging and Troubleshooting**
+
+* [ ] Locate and monitor DHCP server logs (e.g., `/var/log/syslog` or `/var/log/messages`)
+* [ ] Enable detailed logging in DHCP configuration
+* [ ] Troubleshoot issues with leases, reservations, or incorrect options
+* [ ] Use tools like `tcpdump` or `wireshark` to inspect DHCP traffic
+
+---
+
+### 9. **DHCP Relay (dhcrelay)**
+
+* [ ] Understand the purpose and function of DHCP relay agents
+* [ ] Install and configure `dhcrelay` on an intermediate host
+* [ ] Test and verify relay behavior between networks
+
+---
+
+### 10. **Security in DHCP**
+
+* [ ] Restrict access to DHCP based on MAC address or interface
+* [ ] Understand and mitigate risks from rogue DHCP servers
+* [ ] Explore DHCP snooping (switch-level configuration)
+* [ ] Use firewall rules to contain or limit DHCP traffic
+
+---
+
+### 11. **Advanced DHCP Features**
+
+* [ ] Configure multiple subnets and multiple ranges in one config
+* [ ] Set up failover/load balancing between two DHCP servers
+* [ ] Configure DDNS (Dynamic DNS updates) integration with DHCP
+* [ ] Understand DHCPv6 basics and configuration differences
+
+---
+
+### 12. **Alternative DHCP Implementations**
+
+* [ ] Install and configure `dnsmasq` for small-scale DHCP needs
+* [ ] Explore `systemd-networkd`'s built-in DHCP server (for minimal systems)
+* [ ] Compare ISC DHCP vs Kea DHCP (modern alternative by ISC)
+
+---
+
+### 13. **Maintenance and Backup**
+
+* [ ] Backup DHCP configuration files and lease databases
+* [ ] Restore DHCP server from a backup
+* [ ] Automate lease cleanup or archiving
+* [ ] Keep server software updated and secure
+
+---
+
+## DHCP Management – Hands-On Exercises
+
+1. **Install the DHCP Server**
+
+   * Install `isc-dhcp-server` (Debian/Ubuntu) or `dhcpd` (RHEL/CentOS/Fedora).
+   * Verify the installation and locate key configuration files.
+
+2. **Start and Enable the DHCP Service**
+
+   * Start the DHCP service using `systemctl`.
+   * Enable the service to start on boot.
+   * Check the status and logs for service confirmation.
+
+3. **Configure a Basic DHCP Server**
+
+   * Edit `/etc/dhcp/dhcpd.conf` to define a subnet with:
+
+     * IP address range
+     * Default gateway
+     * DNS servers
+     * Lease time values
+
+4. **Assign Static IPs via DHCP Reservation**
+
+   * Assign a fixed IP to a client using its MAC address.
+   * Verify the reservation from both server and client sides.
+
+5. **Configure Multiple Subnets**
+
+   * Define two or more subnet declarations for different networks.
+   * Assign each to the correct interface or relay setup.
+
+6. **Start and Use a DHCP Client**
+
+   * Use `dhclient` on a Linux machine to request an IP.
+   * Release and renew the IP lease manually.
+
+7. **View and Manage Lease Information**
+
+   * Explore the lease file at `/var/lib/dhcp/dhcpd.leases`.
+   * Identify active leases and expired entries.
+
+8. **Enable and Test Logging**
+
+   * Enable detailed DHCP logging in the config.
+   * Monitor logs in `/var/log/syslog` or `/var/log/messages`.
+
+9. **Test DHCP Failures and Recovery**
+
+   * Deliberately misconfigure the DHCP server and troubleshoot.
+   * Correct the configuration and restore proper lease delivery.
+
+10. **Configure a DHCP Relay**
+
+    * Set up `dhcrelay` to forward requests from a different subnet.
+    * Verify relayed requests are handled by the central DHCP server.
+
+11. **Simulate Multiple Clients**
+
+    * Use virtual machines or containers to simulate multiple DHCP clients.
+    * Observe how the server handles concurrent requests.
+
+12. **Configure a Secondary DHCP Server (Failover)**
+
+    * Create a second DHCP server in failover mode (if supported).
+    * Test load balancing or redundancy behavior.
+
+13. **Integrate DHCP with DNS (Optional Advanced)**
+
+    * Configure Dynamic DNS (DDNS) updates from the DHCP server.
+    * Use `nsupdate` to update DNS records based on DHCP events.
+
+14. **Set Up DHCP with dnsmasq (Lightweight Alternative)**
+
+    * Install and configure `dnsmasq` to provide DHCP and DNS services.
+    * Test leases and compare behavior with ISC DHCP.
+
+15. **Secure the DHCP Server**
+
+    * Limit access by interface or subnet.
+    * Set up firewall rules to restrict DHCP traffic.
+    * Identify rogue DHCP servers using `tcpdump` or `nmap`.
+
+16. **Back Up and Restore DHCP Configurations**
+
+    * Create a backup of DHCP config and lease files.
+    * Simulate recovery from backup on a new system.
+
+17. **Monitor DHCP Traffic**
+
+    * Use `tcpdump` to capture DHCP packets.
+    * Analyze DHCPDISCOVER, DHCPOFFER, DHCPREQUEST, DHCPACK messages.
+
+18. **Experiment with DHCP Options**
+
+    * Add options for domain name, NTP server, WINS server, etc.
+    * Verify they are received by the client.
+
+19. **Set Lease Durations**
+
+    * Configure short and long lease times.
+    * Observe renewal behavior and logs.
+
+20. **Troubleshoot Common DHCP Issues**
+
+    * Handle scenarios like:
+
+      * IP exhaustion
+      * Invalid option delivery
+      * Conflicting static/manual IPs
+
+---
+
+</details>
+
+<details>
+  <summary>NIS</summary>
+
+---
+
+## **NIS Management Topics in Linux Administration**
+
+---
+
+### 1. **Introduction to NIS**
+
+* What is NIS and its role in centralized authentication
+* NIS vs LDAP vs other directory services
+* Components of NIS: master server, slave server, clients
+
+---
+
+### 2. **NIS Architecture and Concepts**
+
+* Domain name vs hostname in NIS
+* NIS maps: passwd, group, hosts, services, etc.
+* ypserv, ypbind, ypxfr, yppush, and their functions
+* NIS master-slave replication model
+
+---
+
+### 3. **Installing NIS Services**
+
+* Installing NIS packages: `ypserv`, `ypbind`, `yp-tools`
+* Setting up NIS master server
+* Configuring slave servers for redundancy
+* Installing and configuring NIS client packages
+
+---
+
+### 4. **Configuring NIS Server (Master)**
+
+* Setting the NIS domain name
+* Editing and initializing `/etc/yp.conf`, `/var/yp/Makefile`
+* Managing source files in `/etc` (passwd, group, hosts, etc.)
+* Creating NIS maps using `ypinit -m`
+* Starting and enabling NIS services (`ypserv`, `ypxfrd`)
+
+---
+
+### 5. **Configuring NIS Clients**
+
+* Setting the NIS domain name with `domainname` or `/etc/defaultdomain`
+* Configuring `/etc/yp.conf` and `/etc/nsswitch.conf`
+* Binding the client to the correct NIS domain and server
+* Starting and enabling `ypbind` service
+* Verifying user and group information from NIS
+
+---
+
+### 6. **Creating and Managing NIS Maps**
+
+* Adding new users and groups to NIS
+* Rebuilding and pushing maps using `make` and `yppush`
+* Listing available maps using `ypcat`, `ypwhich`, `yppoll`
+* Transferring maps to slave servers using `ypxfr`
+
+---
+
+### 7. **NIS Slave Server Configuration**
+
+* Setting up a slave using `ypinit -s`
+* Automating map transfer with `cron` or `ypxfrd`
+* Testing redundancy and failover
+
+---
+
+### 8. **User Authentication with NIS**
+
+* NIS-based login for users across client machines
+* Password management and shadow password support
+* Integrating NIS with PAM (Pluggable Authentication Modules)
+
+---
+
+### 9. **Security in NIS**
+
+* Limiting access to NIS servers using TCP wrappers or firewalls
+* Restricting map access and controlling which maps are shared
+* Using `securenets` file to restrict client access by IP
+* Understanding security weaknesses in NIS (e.g., clear-text transmission)
+
+---
+
+### 10. **Troubleshooting NIS**
+
+* Common NIS errors: domain not bound, map not found, authentication failure
+* Using diagnostic tools: `ypwhich`, `ypcat`, `yptest`, `rpcinfo`
+* Checking and interpreting logs for NIS services
+* Restarting services and reinitializing maps
+
+---
+
+### 11. **Maintenance and Backup**
+
+* Backing up NIS source files and map databases
+* Updating maps safely without downtime
+* Migrating from NIS to LDAP (for long-term maintainability)
+
+---
+
+### 12. **Alternatives and Deprecation**
+
+* Understanding NIS limitations and aging status
+* Comparing NIS with LDAP, Kerberos, and SSSD
+* Planning transition strategies from NIS to modern authentication systems
+
+---
+
+## ✅ NIS Management in Linux – Comprehensive Study Checklist
+
+---
+
+### 1. **Understanding NIS Basics**
+
+* [ ] Understand the role and purpose of NIS in Linux environments
+* [ ] Compare NIS with LDAP and other directory services
+* [ ] Learn the client-server architecture of NIS (master, slave, clients)
+* [ ] Understand NIS terminology: domain name, maps, bindings, ypbroadcast
+
+---
+
+### 2. **NIS Installation**
+
+* [ ] Install necessary NIS packages (`ypserv`, `ypbind`, `yp-tools`) on server and clients
+* [ ] Verify NIS services are installed and accessible
+
+---
+
+### 3. **NIS Server Configuration (Master)**
+
+* [ ] Set the NIS domain name using `domainname` and persist it
+* [ ] Configure `/etc/yp.conf` on the server
+* [ ] Edit `/var/yp/Makefile` to define which files are mapped
+* [ ] Initialize NIS master server with `ypinit -m`
+* [ ] Start and enable NIS services: `ypserv`, `ypxfrd`
+
+---
+
+### 4. **Configuring NIS Maps**
+
+* [ ] Understand the function of NIS maps (passwd, group, hosts, etc.)
+* [ ] Add users/groups to `/etc/passwd` and `/etc/group` for inclusion in NIS
+* [ ] Rebuild maps using `make` and push changes using `yppush`
+* [ ] List maps with `ypcat`, `yppoll`, `ypwhich`
+
+---
+
+### 5. **Setting Up NIS Clients**
+
+* [ ] Set and persist the NIS domain name
+* [ ] Configure `/etc/yp.conf` and `/etc/nsswitch.conf` on clients
+* [ ] Start and enable `ypbind` service
+* [ ] Verify successful NIS binding using `ypwhich` and `ypcat`
+* [ ] Test login using NIS user accounts
+
+---
+
+### 6. **NIS Slave Server Configuration**
+
+* [ ] Configure a slave server using `ypinit -s`
+* [ ] Enable and test map transfers from master using `ypxfr`
+* [ ] Ensure the slave takes over if master fails
+* [ ] Automate map sync via `cron` or `ypxfrd`
+
+---
+
+### 7. **User Authentication via NIS**
+
+* [ ] Understand how NIS handles login credentials
+* [ ] Configure NIS-based authentication using `/etc/nsswitch.conf`
+* [ ] Integrate NIS with PAM for login and password management
+* [ ] Handle shadow password support in NIS securely
+
+---
+
+### 8. **Securing NIS**
+
+* [ ] Restrict map access using `/var/yp/securenets`
+* [ ] Configure firewall or TCP wrappers to limit NIS access
+* [ ] Understand the risks of NIS (unencrypted communication)
+* [ ] Disable unused or insecure maps
+
+---
+
+### 9. **Troubleshooting NIS**
+
+* [ ] Diagnose domain binding issues with `ypwhich` and `rpcinfo`
+* [ ] Resolve common errors: map not found, domain not bound, failed authentication
+* [ ] Check logs for `ypserv`, `ypbind`, and other services
+* [ ] Restart services and rebuild maps when needed
+
+---
+
+### 10. **Maintenance and Best Practices**
+
+* [ ] Backup NIS source files and map data regularly
+* [ ] Safely edit and update maps without interrupting clients
+* [ ] Monitor system logs for NIS activity or anomalies
+* [ ] Apply updates and patch NIS services when needed
+
+---
+
+### 11. **Migrating from NIS**
+
+* [ ] Understand limitations of NIS and deprecation trends
+* [ ] Compare with LDAP, Kerberos, SSSD
+* [ ] Plan and test a migration path from NIS to modern alternatives
+
+---
+
+## Hands-On Exercises in NIS Management 
+
+---
+
+### 1. **Install NIS Components**
+
+* Install the required NIS packages:
+
+  * `ypserv`, `ypbind`, `yp-tools` (server and client)
+* Verify installation and service availability.
+
+---
+
+### 2. **Set NIS Domain Name**
+
+* Use `domainname` to set the NIS domain temporarily.
+* Make the domain name persistent across reboots.
+
+---
+
+### 3. **Configure the NIS Master Server**
+
+* Edit `/etc/yp.conf` to define NIS domain and server.
+* Modify `/var/yp/Makefile` to include necessary maps.
+* Initialize the master server with `ypinit -m`.
+* Start and enable `ypserv` and `ypxfrd`.
+
+---
+
+### 4. **Create and Push NIS Maps**
+
+* Populate `/etc/passwd`, `/etc/group`, and other files.
+* Run `make` in `/var/yp` to create maps.
+* Use `yppush` to distribute maps to clients or slaves.
+
+---
+
+### 5. **Configure an NIS Client**
+
+* Set the NIS domain name on the client.
+* Edit `/etc/yp.conf` to point to the NIS server.
+* Modify `/etc/nsswitch.conf` to use NIS for passwd, group, etc.
+* Start and enable `ypbind`.
+
+---
+
+### 6. **Verify NIS Client Functionality**
+
+* Run `ypwhich` to check the bound NIS server.
+* Use `ypcat passwd` to retrieve map entries.
+* Attempt login using an NIS user account.
+
+---
+
+### 7. **Set Up an NIS Slave Server**
+
+* Install NIS packages on the slave.
+* Run `ypinit -s` to initialize from the master.
+* Schedule map transfers with `ypxfr` or enable `ypxfrd`.
+
+---
+
+### 8. **Add and Manage NIS Users**
+
+* Create a new user in `/etc/passwd` and `/etc/shadow`.
+* Rebuild the maps with `make`.
+* Test login with the new user from the client.
+
+---
+
+### 9. **Use NIS Diagnostic Tools**
+
+* Use `ypwhich`, `ypcat`, `yppoll`, and `rpcinfo` for diagnostics.
+* View and interpret map entries using `ypmatch`.
+
+---
+
+### 10. **Secure the NIS Server**
+
+* Configure `/var/yp/securenets` to restrict access by IP/subnet.
+* Apply firewall rules to block unwanted access to NIS ports.
+* Disable unused maps or restrict sensitive ones.
+
+---
+
+### 11. **Test NIS Failover with Slave Server**
+
+* Shut down the master server.
+* Check if the client binds to the slave server.
+* Test NIS services via the slave.
+
+---
+
+### 12. **Automate NIS Map Backups**
+
+* Create a cron job to back up `/etc/passwd`, `/etc/group`, and `/var/yp`.
+
+---
+
+### 13. **Rebuild and Troubleshoot Broken Maps**
+
+* Corrupt or remove a map file, then rebuild it.
+* Use logs and `make` to identify and fix the issue.
+
+---
+
+### 14. **Integrate NIS with PAM**
+
+* Modify PAM configuration files to allow NIS authentication.
+* Test password changes and login behavior.
+
+---
+
+### 15. **Remove NIS and Revert to Local Authentication**
+
+* Stop and disable NIS services.
+* Restore `/etc/nsswitch.conf` to local-only.
+* Verify local user login after NIS removal.
 
 ---
 
